@@ -40,7 +40,7 @@ public class JDBCUtils {
 			try {
 				if(connection != null){
 					connection.close();
-					System.out.println("1cesehi");
+					System.out.println("πÿ±’¡¨Ω”");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

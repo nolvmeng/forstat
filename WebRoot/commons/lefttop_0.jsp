@@ -24,12 +24,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="<%=path%>/css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
 <!-- chart -->
-<script src="<%=path%>/js/Chart.js"></script>
+<script src="js/Chart.js"></script>
 <!-- //chart -->
 <!--animate-->
 <link href="<%=path%>/css/animate.css" rel="stylesheet" type="text/css" media="all">
-<link rel="stylesheet" href="<%=path%>/css/weather.css" type='text/css' />
-<script src="<%=path%>/js/wow.min.js"></script>
+<script src="js/wow.min.js"></script>
 	<script>
 		 new WOW().init();
 	</script>
@@ -38,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!---//webfonts---> 
  <!-- Meters graphs -->
-<script src="<%=path%>/js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
 <!-- Placed js at the end of the document so the pages load faster -->
 
 </head> 
@@ -163,8 +162,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</div>
 									</div>
 										<!-- search-scripts -->
-										<script src="<%=path %>/js/classie.js"></script>
-										<script src="<%=path %>/js/uisearch.js"></script>
+										<script src="js/classie.js"></script>
+										<script src="js/uisearch.js"></script>
 											<script>
 												new UISearch( document.getElementById( 'sb-search' ) );
 											</script>
@@ -289,22 +288,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 							<div class="clearfix"> </div>
 						</ul>
-					</div>
-				<tianqi>
-				<div class="weather">
-				<div class="iframe">
-				</div>
-				</div>
-				</tianqi>		
-					
+					</div>		
+					<iframe src="http://m.weather.com.cn/m/pn6/weather.htm " width="140" height="18" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" allowtransparency="true" scrolling="no">
+					</iframe>  
 			<!--notification menu end -->
 		<!-- //header-ends -->
 			
    </section>
   
-<script src="<%=path%>/js/jquery.nicescroll.js"></script>
-<script src="<%=path%>/js/scripts.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
-   <script src="<%=path %>/js/bootstrap.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
