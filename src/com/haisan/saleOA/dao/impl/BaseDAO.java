@@ -75,7 +75,7 @@ public class BaseDAO<T> implements Dao<T>{
 		try {
 			//connection = JDBCUtils.getConnection();
 			connection = ConnectionContext.getInstance().get();
-			if(connection!=null) System.out.println("fg");
+			if(connection!=null) System.out.println("∑«ø’¡¨Ω”");
 			return queryRunner.query(connection, sql, new BeanHandler<T>(clazz), args);
 		} catch (Exception e) {
 			e.printStackTrace();

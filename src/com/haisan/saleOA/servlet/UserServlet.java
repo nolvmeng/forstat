@@ -56,11 +56,15 @@ public class UserServlet extends HttpServlet {
 		String password =  request.getParameter("password");
 		
 		Boolean isTrue = userService.isLogin(id, password);
+		if(isTrue == true){ 
+		    System.out.println(id+password+isTrue + "OCK!");
+	    
+		}/*else {
+			System.out.println();
+			response.sendRedirect("//error.jsp");
+		}*/
 		
-		
-		System.out.println(id+password+isTrue + "OCK!");
-		request.getRequestDispatcher("//success.jsp").forward(request, response);	    
-		
+	    request.getRequestDispatcher("//success.jsp").forward(request, response);
 	}
 	
 	
