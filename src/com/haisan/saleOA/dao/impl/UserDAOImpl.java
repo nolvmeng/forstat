@@ -4,6 +4,7 @@ import com.haisan.saleOA.domain.User;
 
 public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
 
+	
 	@Override
 	public User getUser(String id) {
 		String sql = "SELECT userId, username, password, position FROM users WHERE userId = ?";
@@ -12,5 +13,11 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
 		
 	}
 	
+	@Override
+	public void addAUser(String id, String name, String password){
+		String sql = "INSERT INTO users (userId, username, password, position) VALUES(? ,? , ?, ?)";
+		update(sql, id, name, password, "simple");
+	
+	}
 
 }

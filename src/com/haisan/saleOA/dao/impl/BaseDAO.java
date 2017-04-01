@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.haisan.saleOA.dao.*;
 import com.haisan.saleOA.db.JDBCUtils;
@@ -35,8 +37,8 @@ public class BaseDAO<T> implements Dao<T>{
 		ResultSet resultSet = null;
 		
 		try {
-			connection = JDBCUtils.getConnection();
-			//connection = ConnectionContext.getInstance().get();
+			//connection = JDBCUtils.getConnection();
+			connection = ConnectionContext.getInstance().get();
 			if(connection!=null) System.out.println("fg");
 			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
@@ -65,17 +67,25 @@ public class BaseDAO<T> implements Dao<T>{
 
 	@Override
 	public void update(String sql, Object... args) {
-		// TODO Auto-generated method stub
-		
+         
+        Connection connection = null;
+		//Connection connection =  JDBCUtils.getConnection();
+		try {
+			connection = ConnectionContext.getInstance().get();
+			queryRunner.update(connection, sql, args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public T query(String sql, Object... args) {
-		Connection connection = null;		
+		  Connection connection = null;
+		//connection = JDBCUtils.getConnection();
 		try {
-			//connection = JDBCUtils.getConnection();
+			
 			connection = ConnectionContext.getInstance().get();
-			if(connection!=null) System.out.println("fg");
+			if(connection!=null) System.out.println("∑«ø’¡¨Ω”");
 			return queryRunner.query(connection, sql, new BeanHandler<T>(clazz), args);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,19 +99,43 @@ public class BaseDAO<T> implements Dao<T>{
 
 	@Override
 	public List<T> queryForList(String sql, Object... args) {
-		// TODO Auto-generated method stub
+       Connection connection = null;
+      // connection = JDBCUtils.getConnection();
+		try {
+			connection = ConnectionContext.getInstance().get();
+			return queryRunner.query(connection, sql, new BeanListHandler<T>(clazz), args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return null;
 	}
 
 	@Override
 	public <V> V getSingleVal(String sql, Object... args) {
-		// TODO Auto-generated method stub
+		 Connection connection = null;
+	     //connection = JDBCUtils.getConnection();
+		
+		try {
+			connection = ConnectionContext.getInstance().get();
+			return (V)queryRunner.query(connection, sql, new ScalarHandler(), args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
 	@Override
 	public void batch(String sql, Object[]... params) {
-		// TODO Auto-generated method stub
+		 Connection connection = null;
+	     //connection = JDBCUtils.getConnection();
+		
+		try {
+			connection = ConnectionContext.getInstance().get();
+			queryRunner.batch(connection, sql, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
     

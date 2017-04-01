@@ -12,6 +12,7 @@ public class UserService {
 		return userDAO.getUser(id);
 		
 	}
+	
 	//验证user密码
 	public Boolean isLogin(String id, String password) {
 		User user = getUser(id);
@@ -20,6 +21,12 @@ public class UserService {
 		}
 		
 		return user.getPassword().equals(password);
+	}
+	
+	//添加账户
+	public User addUser(String id, String name, String password){
+		userDAO.addAUser(id, name, password);		
+        return userDAO.getUser(id);		//返回新建的用户，用于反馈是否创建
 	}
 	
 }

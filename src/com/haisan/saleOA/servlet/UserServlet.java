@@ -8,7 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.haisan.saleOA.domain.User;
 import com.haisan.saleOA.service.UserService;
 
 public class UserServlet extends HttpServlet {
@@ -56,13 +58,39 @@ public class UserServlet extends HttpServlet {
 		String password =  request.getParameter("password");
 		
 		Boolean isTrue = userService.isLogin(id, password);
-		
-		
-		System.out.println(id+password+isTrue + "OCK!");
-		request.getRequestDispatcher("//success.jsp").forward(request, response);	    
-		
+		if(isTrue == true){ 
+		    System.out.println(id+password+isTrue + "OCK!");
+		    HttpSession session = request.getSession();//session
+	        User userw = userService.getUser(id);
+	        session.setAttribute("userw", userw);//session记录登录用户
+			System.out.print(userw.getUsername());
+			
+			//request.setAttribute("method", "Allgoods");
+			request.getRequestDispatcher("/servlet/GoodServlet?method=AllGoods").forward(request, response);
+			
+			//request.getRequestDispatcher("/WEB-INF/pages/showGood.jsp").forward(request, response);
+		}/*else {
+			System.out.println();
+			response.sendRedirect("//error.jsp");
+		}*/
 	}
 	
-	
+	public void addUser(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		//创建用户
+		String userId = request.getParameter("userId");
+		String userName = request.getParameter("userName");
+		String password = request.getParameter("password");
+		User user = userService.addUser(userId, userName, password);
+		if(user != null) {
+			System.out.println( "upCK!");
+		    HttpSession session = request.getSession();//session
+	        User userw = userService.getUser(userId);
+	        session.setAttribute("userw", userw);//session记录登录用户
+	        request.getRequestDispatcher("//testLogin.jsp").forward(request, response);
+	         }/*else {
+		           	System.out.println();
+	                response.sendRedirect("//error.jsp");
+            }*/
+		}
 
 }
