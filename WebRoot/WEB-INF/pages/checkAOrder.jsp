@@ -184,6 +184,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <th>货品编号</th>
 							  <th>货品名称</th>
 							  <th>单价</th>
+							  <th>库存</th>
 							  <th>金额</th>
 							</tr>
 						  </thead>
@@ -199,7 +200,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <th scope="row"><%=g.getGood().getGoodId() %></th>
 							  <td><%=g.getGood().getGoodName() %></td>
 							  <td><%=g.getGood().getGoodPrice()+"元" %></td>
-							  <td>数量<input name="<%=g.getItemMoney() %>" type="text" width="20pd" size="4dp"/></td>
+							  <td><%=g.getGood().getReserve()+"公斤"%></td>
+							  <td>数量<input name="<%=i%>" type="text" width="20pd" size="4dp"/></td>
 							</tr><% i++;} %>
 							
 						  </tbody>

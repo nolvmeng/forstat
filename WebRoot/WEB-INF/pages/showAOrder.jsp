@@ -212,7 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<tr class="<%=cla[i%2] %>">
 							  <th scope="row"  ><%=d.getGood().getGoodId()%></th>
 							  <td><%=d.getGood().getGoodName() %></td>
-							  <td><%=d.getGood().getGoodPrice()+"元" %></td>
+							  <td><%=d.getGood().getGoodPrice()+"元/公斤" %></td>
 							 
 							   
 							  <td><%=d.getAmount() %></td>

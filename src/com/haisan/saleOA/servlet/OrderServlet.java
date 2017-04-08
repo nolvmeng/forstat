@@ -2,6 +2,7 @@ package com.haisan.saleOA.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,7 +86,7 @@ public class OrderServlet extends HttpServlet {
 		
 	}
 	
-	
+	//进入核对订单
 	public  void toCheck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		 gooditem =(List<GoodItem>) request.getAttribute("good");
 	           if(request.getSession().getAttribute("good")!= null) {
@@ -98,17 +99,35 @@ public class OrderServlet extends HttpServlet {
 	}
 	          // gooditem.clear();
 	
-	
+	//确认数量，完成新订单
 	public void toCheckSu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		List<String> id = new ArrayList<String>();
-		//gooditem.clear();//清除
-		/*List<GoodItem> gooditem= new ArrayList<GoodItem>(); 
-		Good good = GService.getGood("G0005");
-		Order or = OService.getOrder("O12345");
-		or.setOrderId("T19999");
-		OService.addOrder(or);
-		gooditem.add(new GoodItem(good,23) );
-		SService.addBatch(gooditem, "T19999");*/
+		
+		List<GoodItem> items = (List<GoodItem>) request.getSession().getAttribute("good");
+		User user = (User)request.getSession().getAttribute("userw");
+		String userId =" ";
+	    if(user != null)  
+		    userId = user.getUserId();
+		if(items != null){
+			 
+			 String customerId ="C1920390";//改为参数获取
+			 Order order = new Order();
+			 order.setCustomerId(customerId);
+			 order.setUserId(userId);
+			 
+			 for(int i=0;i<items.size();i++){
+				 int amount = 0;
+				 if(request.getParameter(i+"")!=null)
+					 amount = Integer.parseInt(request.getParameter(i+""));
+				 items.get(i).setAmount(amount);//设置货品数量
+				// System.out.println(items.get(i).getAmount());
+				 
+			 }
+			 //System.out.println(items.size());
+			 
+			OService.addOrder(items, order); 
+		}
+		
+		 
 		
 		
 		

@@ -1,5 +1,6 @@
 package com.haisan.saleOA.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ public class OrderService {
 	ShipmentDAOimpl SDao = new ShipmentDAOimpl();
 	CustomerDAOimpl CDao = new CustomerDAOimpl();
 	GoodService GService = new GoodService();
-	 
+	ShipmentService SService = new ShipmentService();
 /*	
 	public  Page<Order> getAllOrder(int pageNO, int pageSize, String userId){
 		User user = UDao.getUser(userId);
@@ -139,8 +140,13 @@ public class OrderService {
 	
 	
 	
-	 public void addOrder(Order order){
-		 ODao.addOrder(order);
+	 public void addOrder(List<GoodItem> items, Order order){
+		String orderId = "Test129";//
+		Date orderDate = new Date(System.currentTimeMillis());//获取当前日期
+		order.setOrderId(orderId);
+		order.setOrderDate(orderDate);
+		ODao.addOrder(order);
+		SService.addBatch(items, order.getOrderId());
 	 }
 	 
 	 public Order getOrder(String orderId){
