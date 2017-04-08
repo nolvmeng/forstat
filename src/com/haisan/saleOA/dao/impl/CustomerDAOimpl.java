@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.haisan.saleOA.dao.CustomerDAO;
 import com.haisan.saleOA.domain.Customer;
+import com.haisan.saleOA.domain.Good;
+import com.haisan.saleOA.web.Page;
 
 public class CustomerDAOimpl extends BaseDAO<Customer> implements CustomerDAO  {
 
@@ -34,6 +36,23 @@ public class CustomerDAOimpl extends BaseDAO<Customer> implements CustomerDAO  {
 	public List<Customer> getCuCa() {
 		String sql = "SELECT * FROM customers ";
 		return  queryForList(sql);
+	}
+
+	@Override
+	public int getTotalNum() {
+		String sql = "SELECT count(customerId) FROM customers";
+		long num = getSingleVal(sql);
+		int n = (int)num;
+		return n;
+		
+	}
+
+	@Override
+	public   List<Customer> getCusList(int start, int pageSize) {
+		
+		String sql = "SELECT * FROM customers ORDER BY customerId ASC LIMIT ? ,?"; 
+		return queryForList(sql,  start, pageSize);
+		
 	}
      
 	

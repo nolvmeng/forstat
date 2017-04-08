@@ -54,7 +54,7 @@ public class ShipmentService {
     		for(int j=i+1; j<item.size(); j++){
     			if(item.get(i).getGood().getGoodId().equals(item.get(j).getGood().getGoodId())){
     				newAmount +=item.get(j).getAmount();
-    				item.remove(j);
+    				item.remove(j);//ÒÆ³öÁÐ±í
     				j--;
     			}
     		}

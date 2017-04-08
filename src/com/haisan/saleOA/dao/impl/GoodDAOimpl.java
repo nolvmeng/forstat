@@ -6,6 +6,7 @@ import java.util.List;
 import com.haisan.saleOA.dao.GoodDAO;
 import com.haisan.saleOA.domain.Good;
 import com.haisan.saleOA.domain.User;
+import com.haisan.saleOA.web.Page;
 
 public class GoodDAOimpl extends BaseDAO<Good> implements GoodDAO  {
     
@@ -47,6 +48,37 @@ public class GoodDAOimpl extends BaseDAO<Good> implements GoodDAO  {
 		String sql = "SELECT * FROM goods ORDER BY goodId DESC  ";
 		List<Good> GList = queryForList(sql);
 		return GList;
+	}
+
+	@Override
+	public List<Good> getPageGood(int start, int pageSize) {
+		String sql = "SELECT * FROM goods ORDER BY goodId ASC LIMIT ? ,?"; 
+		return queryForList(sql, start, pageSize);
+		 
+	}
+
+	@Override
+	public int getTotalGoodNumber() {
+		String sql = "SELECT count(goodId) FROM goods ";
+		long num = getSingleVal(sql);
+		int n = (int)num;
+		return n;
+	}
+
+	@Override
+	public int getCaTotal(String category) {
+		String sql = "SELECT count(goodId) FROM goods WHERE category=?";
+		long num = getSingleVal(sql, category);
+		int n = (int)num;
+		return n;
+		
+	}
+
+	@Override
+	public List<Good> getCaPageGood(int start, int pageSize, String category) {
+		String sql = "SELECT * FROM goods WHERE category=? ORDER BY goodId ASC LIMIT ? ,?"; 
+		return queryForList(sql, category, start, pageSize);
+		
 	}
 
 }

@@ -19,10 +19,15 @@ public class TestGoodDAOimpl {
 		  Date productDate = null ;
 		  int reserve=1;
 		  String category="shui";*/
-		  
-		  
-		  Good good = GG.getGood("120");//getbook测试通过
-			if(good!=null)good.setGoodId("12w89");
+		 Good good = GG.getGood("G0001");//getbook测试通过
+		 //@SuppressWarnings("deprecation")
+		//Date productDate  = new Date(107, 0, 1);
+		 Date productDate = new Date(System.currentTimeMillis());//获取当前日期
+		 
+		 
+			if(good!=null){good.setGoodId("112w89");
+			good.setProductDate(productDate);
+			}
        		GG.addGood(good);
 	 
 	}//测试通过

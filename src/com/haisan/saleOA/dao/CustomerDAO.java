@@ -3,6 +3,7 @@ package com.haisan.saleOA.dao;
 import java.util.List;
 
 import com.haisan.saleOA.domain.Customer;
+import com.haisan.saleOA.web.Page;
 
 public interface CustomerDAO {
 
@@ -11,7 +12,7 @@ public interface CustomerDAO {
 	 * @ param customerId:Stirng
 	 * @ return Customer
 	 **/
-    public Customer getCustomer(String customerId);
+    public abstract  Customer getCustomer(String customerId);
     
     
     /**
@@ -19,15 +20,32 @@ public interface CustomerDAO {
      * @param customer
      * return int 1为成功
      **/
-    public int addCustomer(Customer customer);
+    public abstract int addCustomer(Customer customer);
     
     /**
      * 修改customer记录
      * **/
-    public int setCustomer(Customer customer);
+    public abstract int setCustomer(Customer customer);
     
     /**
      * 获取customer所有记录
      **/
-    public List<Customer> getCuCa();
+    public abstract List<Customer> getCuCa();
+    
+    
+    /**
+     * 获取客户数目 
+     * @return int : 数目
+     **/
+    public abstract int getTotalNum();
+    
+    
+    /**
+     * 份表查询获取客户List
+     *@param int : start
+     *@param int : end
+     *@return Page<Customer>: 用户列表
+     **/
+    public abstract List<Customer> getCusList(int start, int pageSize);
+    
 }

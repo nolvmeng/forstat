@@ -37,8 +37,8 @@ public class BaseDAO<T> implements Dao<T>{
 		ResultSet resultSet = null;
 		
 		try {
-			//connection = JDBCUtils.getConnection();
-			connection = ConnectionContext.getInstance().get();
+			connection = JDBCUtils.getConnection();
+			//connection = ConnectionContext.getInstance().get();
 			if(connection!=null) System.out.println("fg");
 			preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
@@ -69,7 +69,7 @@ public class BaseDAO<T> implements Dao<T>{
 	public void update(String sql, Object... args) {
          
         Connection connection = null;
-		//Connection connection =  JDBCUtils.getConnection();
+		// connection =  JDBCUtils.getConnection();
 		try {
 			connection = ConnectionContext.getInstance().get();
 			queryRunner.update(connection, sql, args);
@@ -100,7 +100,7 @@ public class BaseDAO<T> implements Dao<T>{
 	@Override
 	public List<T> queryForList(String sql, Object... args) {
        Connection connection = null;
-      // connection = JDBCUtils.getConnection();
+       //connection = JDBCUtils.getConnection();
 		try {
 			connection = ConnectionContext.getInstance().get();
 			return queryRunner.query(connection, sql, new BeanListHandler<T>(clazz), args);
@@ -110,10 +110,25 @@ public class BaseDAO<T> implements Dao<T>{
 		return null;
 	}
 
+	
+	public List<String> queryForList1(String sql, Object... args) {
+	       Connection connection = null;
+	     //  connection = JDBCUtils.getConnection();
+			try {
+				connection = ConnectionContext.getInstance().get();
+				return (List<String>) queryRunner.query(connection, sql, new BeanListHandler<T>(clazz), args);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			return null;
+		}
+	
+	
+	
 	@Override
 	public <V> V getSingleVal(String sql, Object... args) {
 		 Connection connection = null;
-	     //connection = JDBCUtils.getConnection();
+	   //  connection = JDBCUtils.getConnection();
 		
 		try {
 			connection = ConnectionContext.getInstance().get();
@@ -128,7 +143,7 @@ public class BaseDAO<T> implements Dao<T>{
 	@Override
 	public void batch(String sql, Object[]... params) {
 		 Connection connection = null;
-	     //connection = JDBCUtils.getConnection();
+	    // connection = JDBCUtils.getConnection();
 		
 		try {
 			connection = ConnectionContext.getInstance().get();

@@ -6,7 +6,7 @@ public class Page<T> {
      
 	private int pageNO  ;//当前页
  
-	private int pageSize=3;//一页显示多少条记录
+	private int pageSize = 10;//一页显示多少条记录
 	
 	//private int listSzie;//无用
 	
@@ -35,12 +35,13 @@ public class Page<T> {
 	//获取总页数方法
 	public int getTotalPageNumber() {
 		/*return (int)(totalItemNumber/listSzie)+1;*/
-        int totalPageNumber = (int)totalItemNumber / pageSize;
+        int totalPageNumber = (int)totalItemNumber / getPageSize();
 		
-		if(totalItemNumber % pageSize != 0){
+		if(totalItemNumber % getPageSize() != 0){
 			totalPageNumber++;
 		}
-		
+		if(totalPageNumber == 0)
+			totalPageNumber= 1;  //为空的状态防止分页查表出从-10开始  start=（totalPageNumber-1）* pageSize
 		return totalPageNumber;
 	}
 
@@ -49,6 +50,8 @@ public class Page<T> {
 	}
 
 	public int getPageSize() {
+		if (pageSize <=0 )
+			pageSize = 1 ;
 		return pageSize;
 	}
 

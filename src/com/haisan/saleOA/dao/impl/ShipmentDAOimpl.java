@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.haisan.saleOA.dao.ShipmentDAO;
+import com.haisan.saleOA.domain.Good;
 import com.haisan.saleOA.domain.GoodItem;
 import com.haisan.saleOA.domain.Shipment;
 
@@ -45,6 +46,19 @@ public class ShipmentDAOimpl extends BaseDAO<Shipment> implements ShipmentDAO{
   		}
   		
   		batch(sql, params);
+	}
+
+	@Override
+	public List<String> getgetListGood(String orderId) {
+		String sql = "SELECT goodId FROM shipment WHERE orderId=?";
+		List<Shipment> list = queryForList(sql, orderId);
+		List<String> GoodIdList = new ArrayList<String>();
+		for(Shipment s :list){
+			GoodIdList.add(s.getGoodId());
+		} 
+		return GoodIdList;
+		
+		
 	}
 
 }

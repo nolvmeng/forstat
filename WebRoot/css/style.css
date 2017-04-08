@@ -970,6 +970,7 @@ ul.nav li a span {
 }
 
 .toggle-btn {
+	
     font-size: 15px;
     padding: 10px 0 0;
     width: 40px;
@@ -1293,12 +1294,21 @@ i.fa.fa-tasks{
 }
 /***** Messages *************/
 /*start search*/
+.classbuton{
+	position: absolute;
+	left: 800px;
+	margin: 10px;
+	height: 30px;
+	background: none;
+	
+}
 .sb-search {
 	position: absolute;
-	left: 115px;
+	left: 1200px;
 	width: 0%;
 	min-width: 30px;
-    margin: 0;
+	
+    margin: 10px;
     height: 30px;
 	overflow: hidden;
 	-webkit-transition: width 0.3s;
@@ -1363,7 +1373,7 @@ i.fa.fa-tasks{
 }
 /* Open state */
 .sb-search.sb-search-open,.no-js .sb-search {
-	width:100%;
+	
 	min-width: 230px;
 }
 .sb-search.sb-search-open .sb-icon-search,.no-js .sb-search .sb-icon-search {
@@ -4844,10 +4854,20 @@ span.checkbox2 {
 }
 .signin-rit p {
 	float: right;
-    width: 30%;
+    width: 16.5%;
 	font-size: 1em;
 }
 .signin-rit p a{
+	
+  color: #999;
+}
+.signin-rit stronger {
+    color: red;
+}
+.signin-rit a{
+	float: right;
+    
+	font-size: 1em;
   color: #999;
 }
 .clear{
@@ -7144,13 +7164,16 @@ ul.collection li {
   font-size: 13px;
 }
 a.btn.btn-default.dropdown-toggle {
+	
   padding: 3px 6px;
   font-size: 13px;
 }
 a.btn.btn-default {
+	position:absolute;
   padding: 3px 9px;
 }
 .btn.btn_1.btn-default.mrg5R {
+	position:abso
   padding: 3px 10px;
 }
 a#home-tab {

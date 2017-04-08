@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.haisan.saleOA.domain.Good;
 import com.haisan.saleOA.domain.User;
 import com.haisan.saleOA.service.GoodService;
+import com.haisan.saleOA.web.Page;
 
 public class GoodServlet extends HttpServlet {
 
@@ -36,6 +37,9 @@ public class GoodServlet extends HttpServlet {
  
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setHeader("content-type", "text/html;charset=UTF-8");  
+		response.setCharacterEncoding("UTF-8");  
+		request.setCharacterEncoding("UTF-8");  
 		String methodName = request.getParameter("method");
 		if (methodName !=null) {
 		try {
@@ -56,17 +60,84 @@ public class GoodServlet extends HttpServlet {
 	public void AllGoods(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("成功");
 
-		List<Good> goods = goodService.getGoods();
-		request.setAttribute("goods", goods);
-		  //HttpSession session = request.getSession();//session
-	     //   User userw = userService.getUser(id);
-	      //  session.setAttribute("userw", userw);//session记录登录用户
+		/*List<Good> goods = goodService.getGoods();
+		request.setAttribute("goods", goods);*/
+		int pageNO = 1;  int pageSize = 10;
+		String cate = "all";
+		String NO = request.getParameter("pageNO") ;
+		String category = request.getParameter("category");
+		request.setAttribute("att_cate",category);
+		Page<Good> pageGood = new Page<Good>(1);
 		
-		request.getRequestDispatcher("/WEB-INF/pages/showGood.jsp").forward(request, response);
-		
+		if(NO != null) {
+			pageNO = Integer.parseInt(NO); 
+			System.out.println("xiyuan");
+			}
+		if(category != null) {
+			cate = category;//获取传入种类参数值
+		   } 
+		System.out.println(pageNO+"p");
+		  pageGood = goodService.getPageGood(pageNO, pageSize, cate);
+		  request.setAttribute("pageGood", pageGood);
+		  
+		  
+		  if(request.getParameter("new")==null)
+		     request.getRequestDispatcher("/WEB-INF/pages/showGood.jsp").forward(request, response);
+		  else if(request.getParameter("tocheck")==null)
+			 request.getRequestDispatcher("/WEB-INF/pages/newAOrder.jsp").forward(request, response);
+		  /*else
+			  request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);*/
 	}
 	
+	//获取某货品
+	public void getAgood(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("成功");
+		String goodid=request.getParameter("search");
+		Good good=goodService.getGood(goodid);
+		if(good!=null){
+			
+		}
+	}
 	
+	//跳转添加货品
+	public void findjsp(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+		request.getRequestDispatcher("/WEB-INF/pages/addAGood.jsp").forward(request, response);
+	}
+	
+	//添加货品
+	public void addGood(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		String goodId = request.getParameter("goodId");
+		String goodName = request.getParameter("goodName");
+		String goodPrice = request.getParameter("goodPrice");
+		String goodNum = request.getParameter("goodNum");
+		String slCategory = request.getParameter("slCategory");
+		int n=Integer.parseInt(goodNum);
+		float p=Float.parseFloat(goodPrice);
+		Good good = goodService.getGood(goodId);//
+		if(good == null){
+			Good addgood=new Good();
+			addgood.setGoodId(goodId);
+			addgood.setGoodName(goodName);
+			addgood.setGoodPrice(p);
+			addgood.setReserve(n);
+			addgood.setCategory(slCategory); 
+			goodService.addGood(addgood);
+			AllGoods(request,response);
+		}else{
+			
+			PrintWriter out = response.getWriter();
+			out.flush();//清空缓存
+			out.println("<script>");//输出script标签
+			out.println("alert('货品已存在，请重新输入！');");//js语句：输出alert语句
+			out.println("history.back();");//js语句：输出网页回退语句
+			out.println("</script>");
+		}
+	}
+	
+	//返回
+		public void back(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+			AllGoods(request,response);
+		}
 	 
 	public void init() throws ServletException {
 		// Put your code here

@@ -35,7 +35,7 @@ public interface OrderDAO {
 	 * @param 
 	 * @return List<Order> 
 	 **/
-    public abstract List<Order> getOrderList();
+    public abstract List<Order> getOrderList(int start, int pageSize);
     
     
     /**
@@ -44,6 +44,34 @@ public interface OrderDAO {
      * @return float
      **/
     public abstract double getTotal(String orderId);
+    
+    
+    /**
+     * 获取条目数
+     * @param String : userId
+     * @return int: 条目数
+     **/
+    public abstract int getTotalNum(String userId);
+    
+    
+    
+    /**
+     * 获取条目数
+     * @return int: 条目数
+     **/
+    public abstract int getTotalNum();
+    
+    
+    /**
+     * 分表查询，获取List<Order>
+     * @param int : start
+     * @param int : pageSize
+     * @param String : userId
+     * @return list<Order> :订单列表
+     **/
+    public abstract List<Order> getOrderList(int start, int pageSize, String userId);
+    
+    
     
     
     

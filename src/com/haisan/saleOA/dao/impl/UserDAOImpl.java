@@ -2,7 +2,7 @@ package com.haisan.saleOA.dao.impl;
 import com.haisan.saleOA.dao.*;
 import com.haisan.saleOA.domain.User;
 
-public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
+public class UserDAOimpl extends BaseDAO<User> implements UserDAO {
 
 	
 	@Override

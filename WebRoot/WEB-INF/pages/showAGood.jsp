@@ -6,10 +6,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include  page="/commons/copyright.jsp"/>
 <%@ page import=" com.haisan.saleOA.web.Page" %>
 <%@ page import=" com.haisan.saleOA.domain.Good" %>
+<%@ page import=" com.haisan.saleOA.domain.OrderItem" %>
+<%@ page import=" com.haisan.saleOA.domain.GoodItem" %>
+<%@ page import=" com.haisan.saleOA.domain.Order" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Home</title>
+<title>Order</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="left" />
@@ -56,16 +59,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h1><a href="index.jsp">您好！ <span>欢迎使用</span></a></h1>
 			</div>
 			<div class="logo-icon text-center">
-				<a href="GoodServlet?method=AllGoods"><i class="lnr lnr-home"></i> </a>
+				<a href="GoodServlet?method=back"><i class="lnr lnr-home"></i> </a>
 			</div>
 
 			<!--logo and iconic logo end-->
 			<div class="left-side-inner">
 
-				<!--sidebar nav start-->
+					<!--sidebar nav start-->
 					<ul class="nav nav-pills nav-stacked custom-nav">
 					<li><span>&nbsp;&nbsp;</span></li>
-						<li class="active"><a href="href="GoodServlet?method=back""><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
+						<li class="active"><a href="GoodServlet?method=back"><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
 						<li>
 							<a href="GoodServlet?method=AllGoods"><i class="fa fa-tasks"></i>
 								<span>货品管理</span></a>
@@ -75,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<li><a href="">删除</a></li>
 								</ul>
 						</li>
-						  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
+					  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
 								<li><a href="">新订单</a> </li>
 								<li><a href="">查看订单</a> </li>
@@ -112,146 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--notification menu start -->
 			<div class="menu-right">
 				<div class="user-panel-top">  	
-					<div class="profile_details_left">
-						<ul class="nofitications-dropdown">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>
-								
-										<ul class="dropdown-menu">
-											<li>
-												<div class="notification_header">
-													<h3>You have 3 new messages</h3>
-												</div>
-											</li>
-											<li><a href="#">
-											   <div class="user_img"><img src="images/1.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor sit amet</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											 </a></li>
-											 <li class="odd"><a href="#">
-												<div class="user_img"><img src="images/1.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor sit amet </p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											  <div class="clearfix"></div>	
-											 </a></li>
-											<li><a href="#">
-											   <div class="user_img"><img src="images/1.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor sit amet </p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											</a></li>
-											<li>
-												<div class="notification_bottom">
-													<a href="#">See all messages</a>
-												</div> 
-											</li>
-										</ul>
-							</li>	
-							 
-						 
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
-								  <ul class="dropdown-menu">
-										<li>
-											<div class="notification_header">
-												<h3>You have 3 new notification</h3>
-											</div>
-										</li>
-										<li><a href="#">
-											<div class="user_img"><img src="images/1.png" alt=""></div>
-										   <div class="notification_desc">
-											<p>Lorem ipsum dolor sit amet</p>
-											<p><span>1 hour ago</span></p>
-											</div>
-										  <div class="clearfix"></div>	
-										 </a></li>
-										 <li class="odd"><a href="#">
-											<div class="user_img"><img src="images/1.png" alt=""></div>
-										   <div class="notification_desc">
-											<p>Lorem ipsum dolor sit amet </p>
-											<p><span>1 hour ago</span></p>
-											</div>
-										   <div class="clearfix"></div>	
-										 </a></li>
-										 <li><a href="#">
-											<div class="user_img"><img src="images/1.png" alt=""></div>
-										   <div class="notification_desc">
-											<p>Lorem ipsum dolor sit amet </p>
-											<p><span>1 hour ago</span></p>
-											</div>
-										   <div class="clearfix"></div>	
-										 </a></li>
-										 <li>
-											<div class="notification_bottom">
-												<a href="#">See all notification</a>
-											</div> 
-										</li>
-									</ul>
-							</li>	
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">22</span></a>
-								  <ul class="dropdown-menu">
-										<li>
-											<div class="notification_header">
-												<h3>You have 8 pending task</h3>
-											</div>
-										</li>
-										<li><a href="#">
-												<div class="task-info">
-												<span class="task-desc">Database update</span><span class="percentage">40%</span>
-												<div class="clearfix"></div>	
-											   </div>
-												<div class="progress progress-striped active">
-												 <div class="bar yellow" style="width:40%;"></div>
-											</div>
-										</a></li>
-										<li><a href="#">
-											<div class="task-info">
-												<span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
-											   <div class="clearfix"></div>	
-											</div>
-										   
-											<div class="progress progress-striped active">
-												 <div class="bar green" style="width:90%;"></div>
-											</div>
-										</a></li>
-										<li><a href="#">
-											<div class="task-info">
-												<span class="task-desc">Mobile App</span><span class="percentage">33%</span>
-												<div class="clearfix"></div>	
-											</div>
-										   <div class="progress progress-striped active">
-												 <div class="bar red" style="width: 33%;"></div>
-											</div>
-										</a></li>
-										<li><a href="#">
-											<div class="task-info">
-												<span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
-											   <div class="clearfix"></div>	
-											</div>
-											<div class="progress progress-striped active">
-												 <div class="bar  blue" style="width: 80%;"></div>
-											</div>
-										</a></li>
-										<li>
-											<div class="notification_bottom">
-												<a href="#">See all pending task</a>
-											</div> 
-										</li>
-									</ul>
-							</li>		 
-							
-						   							   		
-							<div class="clearfix"></div>	
-						</ul>
-					</div>
+					
 					<div class="profile_details">		
 						<ul>
 							<li class="dropdown profile_details_drop">
@@ -285,13 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				</div>
 					<div id="page-wrapper">
-				 <div class="classbuton">
-					<input class="btn btn-default " type="button" value="全部货品" onClick="allfood()"">
-					<input class="btn btn-default " type="button" value="蔬菜类" onClick="getVegetables()">
-					<input class="btn btn-default " type="button" value="肉类" onClick="getMeat()">
-					<input class="btn btn-default " type="button" value="主食类" onClick="getAtaplefood()">
-					<input class="btn btn-default " type="button" value="其他" onClick="getOther()"></div>
-					
+				  	
 				<div class="search-box">
 				
 										<div id="sb-search" class="sb-search">
@@ -318,30 +176,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<table class="table">
 						  <thead>
 							<tr>
-							  <th>货品编号</th>
-							  <th>货品名称</th>
-							  <th>单价</th>
-							  <th></th>
+							  <th>订单编号</th>
+							  <th>操作员编号</th>
+							  <th>客户ID</th>
+							  <th>客户姓名</th>
+							  <th>客户地址</th>
+							  <th>客户电话</th>
+							  <th>订单金额</th>
+						
 							</tr>
 						  </thead>
 						  <tbody>
 						  
-					 <% Page<Good> pageGood = (Page)request.getAttribute("pageGood");
-					    List<Good> goods =pageGood.getList();//(List)request.getAttribute("pageGood");
-					    String ca_ji = (String)request.getAttribute("att_cate");//种类名
-					    String ca ="all";
-					    if(ca_ji != null)
-					       ca= ca_ji ;
+					  <%//Page<OrderItem> pageOrder = (Page)request.getAttribute("pageOrder");
+					  //  Map<String, Double> total =(Map)request.getAttribute("total");
+					  //List<OrderItem> orderItems = pageOrder.getList();
+					    
+					   // List<Order> orders = o.getOrder()%>
+					      <% 
 					    String[] cla = {"success", "info"};
 					    int i = 0;
-					    for(Good g : goods ){  
-					             %>
+					         String id = (String)request.getAttribute("id");
+					         OrderItem o=(OrderItem)session.getAttribute(id); 
+					         List<GoodItem> goodList = o.getGoodList();  %>
 							<tr class="<%=cla[i%2] %>">
-							  <th scope="row"><%=g.getGoodId() %></th>
-							  <td><%=g.getGoodName() %></td>
-							  <td><%=g.getGoodPrice()+"元/公斤" %></td>
-							  <td></td>
+							  <th scope="row"  ><%=o.getOrder().getOrderId() %></a></th>
+							  <td><%=o.getUserId() %></td>
+							  <td><%=o.getCustomer().getCustomerId()%></td>
+							  <td><%=o.getCustomer().getCustomerName() %></td>
+							  <td><%=o.getCustomer().getAddress() %></td>
+							  <td><%=o.getCustomer().getPhoneNum() %></td>
+							  <td> <%=o.getTatalPriceS() %></td>
+							  
+							  <% for(GoodItem d : goodList){
+					           %>
+							 class="<%=cla[i%2] %>">
+							  <th scope="row"  ><%=d.getGood().getGoodId()%></th>
+							  <td><%=d.getGood().getGoodName() %></td>
+							  <td><%=d.getGood().getGoodPrice() %></td>
+							 
+							  <td><%=d.getGood().getProductDate() %></td>
+							  <td><%=d.getAmount() %></td>
+							 <%--  <td><% if(total.get(g.getOrderId())!=null)%><%=total.get(g.getOrderId()) %></td> --%>
+							 <td> <%=d.getItemMoney()%></td>
+							  
 							</tr><% i++;} %>
+							 <%--  <td><% if(total.get(g.getOrderId())!=null)%><%=total.get(g.getOrderId()) %></td> --%>
+							 
+							 
+							
 							
 						  </tbody>
 						</table>
@@ -388,28 +271,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 									<div class="clearfix"> </div>
 								</div>
-								<div class="float-right">
-									       	<div class="btn-group">
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getPrevPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getNextPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-											</div>
-										  
-											<span class="text-muted m-r-sm">当前第<%=pageGood.getPageNO()%>页 ，共<%=pageGood.getTotalPageNumber()%>页 </span>
-											<div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
-												<div class="btn-group">
-													<a class="btn btn-default dropdown-toggle"  >
-													<i class="fa fa-folder">首页</i></a>
-													
-												</div>
-												<div class="btn-group">
-													<a class="btn btn-default dropdown-toggle" >
-													<i class="fa fa-tags">尾页</i> </a>
-												</div>
-											</div>
-										
-										
-									
-								</div>
+								
 							   </div>
 				 
 				 

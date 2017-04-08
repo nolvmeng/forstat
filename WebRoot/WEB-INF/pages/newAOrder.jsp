@@ -6,10 +6,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include  page="/commons/copyright.jsp"/>
 <%@ page import=" com.haisan.saleOA.web.Page" %>
 <%@ page import=" com.haisan.saleOA.domain.Good" %>
+<%@ page import=" com.haisan.saleOA.domain.GoodItem" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Home</title>
+<title>新订单</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="left" />
@@ -56,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h1><a href="index.jsp">您好！ <span>欢迎使用</span></a></h1>
 			</div>
 			<div class="logo-icon text-center">
-				<a href="GoodServlet?method=AllGoods"><i class="lnr lnr-home"></i> </a>
+				<a href="index.jsp"><i class="lnr lnr-home"></i> </a>
 			</div>
 
 			<!--logo and iconic logo end-->
@@ -77,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 						  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
-								<li><a href="">新订单</a> </li>
+								<li><a href="GoodServlet?method=AllGoods&new=is">新订单</a> </li>
 								<li><a href="">查看订单</a> </li>
 							</ul>
 							</li>
@@ -112,146 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--notification menu start -->
 			<div class="menu-right">
 				<div class="user-panel-top">  	
-					<div class="profile_details_left">
-						<ul class="nofitications-dropdown">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>
-								
-										<ul class="dropdown-menu">
-											<li>
-												<div class="notification_header">
-													<h3>You have 3 new messages</h3>
-												</div>
-											</li>
-											<li><a href="#">
-											   <div class="user_img"><img src="images/1.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor sit amet</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											 </a></li>
-											 <li class="odd"><a href="#">
-												<div class="user_img"><img src="images/1.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor sit amet </p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											  <div class="clearfix"></div>	
-											 </a></li>
-											<li><a href="#">
-											   <div class="user_img"><img src="images/1.png" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor sit amet </p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											</a></li>
-											<li>
-												<div class="notification_bottom">
-													<a href="#">See all messages</a>
-												</div> 
-											</li>
-										</ul>
-							</li>	
-							 
-						 
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
-								  <ul class="dropdown-menu">
-										<li>
-											<div class="notification_header">
-												<h3>You have 3 new notification</h3>
-											</div>
-										</li>
-										<li><a href="#">
-											<div class="user_img"><img src="images/1.png" alt=""></div>
-										   <div class="notification_desc">
-											<p>Lorem ipsum dolor sit amet</p>
-											<p><span>1 hour ago</span></p>
-											</div>
-										  <div class="clearfix"></div>	
-										 </a></li>
-										 <li class="odd"><a href="#">
-											<div class="user_img"><img src="images/1.png" alt=""></div>
-										   <div class="notification_desc">
-											<p>Lorem ipsum dolor sit amet </p>
-											<p><span>1 hour ago</span></p>
-											</div>
-										   <div class="clearfix"></div>	
-										 </a></li>
-										 <li><a href="#">
-											<div class="user_img"><img src="images/1.png" alt=""></div>
-										   <div class="notification_desc">
-											<p>Lorem ipsum dolor sit amet </p>
-											<p><span>1 hour ago</span></p>
-											</div>
-										   <div class="clearfix"></div>	
-										 </a></li>
-										 <li>
-											<div class="notification_bottom">
-												<a href="#">See all notification</a>
-											</div> 
-										</li>
-									</ul>
-							</li>	
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">22</span></a>
-								  <ul class="dropdown-menu">
-										<li>
-											<div class="notification_header">
-												<h3>You have 8 pending task</h3>
-											</div>
-										</li>
-										<li><a href="#">
-												<div class="task-info">
-												<span class="task-desc">Database update</span><span class="percentage">40%</span>
-												<div class="clearfix"></div>	
-											   </div>
-												<div class="progress progress-striped active">
-												 <div class="bar yellow" style="width:40%;"></div>
-											</div>
-										</a></li>
-										<li><a href="#">
-											<div class="task-info">
-												<span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
-											   <div class="clearfix"></div>	
-											</div>
-										   
-											<div class="progress progress-striped active">
-												 <div class="bar green" style="width:90%;"></div>
-											</div>
-										</a></li>
-										<li><a href="#">
-											<div class="task-info">
-												<span class="task-desc">Mobile App</span><span class="percentage">33%</span>
-												<div class="clearfix"></div>	
-											</div>
-										   <div class="progress progress-striped active">
-												 <div class="bar red" style="width: 33%;"></div>
-											</div>
-										</a></li>
-										<li><a href="#">
-											<div class="task-info">
-												<span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
-											   <div class="clearfix"></div>	
-											</div>
-											<div class="progress progress-striped active">
-												 <div class="bar  blue" style="width: 80%;"></div>
-											</div>
-										</a></li>
-										<li>
-											<div class="notification_bottom">
-												<a href="#">See all pending task</a>
-											</div> 
-										</li>
-									</ul>
-							</li>		 
-							
-						   							   		
-							<div class="clearfix"></div>	
-						</ul>
-					</div>
+					
 					<div class="profile_details">		
 						<ul>
 							<li class="dropdown profile_details_drop">
@@ -286,11 +148,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 					<div id="page-wrapper">
 				 <div class="classbuton">
-					<input class="btn btn-default " type="button" value="全部货品" onClick="allfood()"">
-					<input class="btn btn-default " type="button" value="蔬菜类" onClick="getVegetables()">
-					<input class="btn btn-default " type="button" value="肉类" onClick="getMeat()">
-					<input class="btn btn-default " type="button" value="主食类" onClick="getAtaplefood()">
-					<input class="btn btn-default " type="button" value="其他" onClick="getOther()"></div>
+					<input class="btn btn-default " type="button" value="全部货品" onClick="n_allfood()"">
+					<input class="btn btn-default " type="button" value="蔬菜类" onClick="n_getVegetables()">
+					<input class="btn btn-default " type="button" value="肉类" onClick="n_getMeat()">
+					<input class="btn btn-default " type="button" value="主食类" onClick="n_getAtaplefood()">
+					<input class="btn btn-default " type="button" value="其他" onClick="n_getOther()"></div>
 					
 				<div class="search-box">
 				
@@ -327,24 +189,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						  <tbody>
 						  
 					 <% Page<Good> pageGood = (Page)request.getAttribute("pageGood");
+					    List<GoodItem> gooditem= new ArrayList<GoodItem>();
 					    List<Good> goods =pageGood.getList();//(List)request.getAttribute("pageGood");
+				    	if (request.getAttribute("goods") != null){
+					             gooditem = (List<GoodItem>)request.getAttribute("goods");
+					             request.setAttribute("good", gooditem);
+					             
+					             }
+					    
 					    String ca_ji = (String)request.getAttribute("att_cate");//种类名
 					    String ca ="all";
 					    if(ca_ji != null)
 					       ca= ca_ji ;
 					    String[] cla = {"success", "info"};
 					    int i = 0;
+					    Map<String, Good> map = new HashMap<String, Good>(12);
 					    for(Good g : goods ){  
 					             %>
 							<tr class="<%=cla[i%2] %>">
-							  <th scope="row"><%=g.getGoodId() %></th>
+							  <th scope="row"><a href="OrderServlet?method=addGood&Id=<%=g.getGoodId() %>"><%=g.getGoodId() %></a></th>
 							  <td><%=g.getGoodName() %></td>
 							  <td><%=g.getGoodPrice()+"元/公斤" %></td>
-							  <td></td>
+							  <td>数量<input type="text" width="20pd" size="4dp"/></td>
 							</tr><% i++;} %>
 							
 						  </tbody>
 						</table>
+						<div class="btn-group">
+							<a href="OrderServlet?method=toCheck" class="btn-success btn"><i class="fa fa-angle-left"></i></a>
+											</div>
+										  
 					   </div>
 				 
 				 
@@ -390,8 +264,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="float-right">
 									       	<div class="btn-group">
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getPrevPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getNextPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
+												<a href="GoodServlet?method=AllGoods&new=is&pageNO=<%=pageGood.getPrevPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
+												<a href="GoodServlet?method=AllGoods&new=is&pageNO=<%=pageGood.getNextPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
 											</div>
 										  
 											<span class="text-muted m-r-sm">当前第<%=pageGood.getPageNO()%>页 ，共<%=pageGood.getTotalPageNumber()%>页 </span>
@@ -414,11 +288,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 
 				 
 				 
-				 
-				 
-				 
-				 
-				 
+				  
 				 
 				 
 				

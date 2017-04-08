@@ -6,10 +6,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include  page="/commons/copyright.jsp"/>
 <%@ page import=" com.haisan.saleOA.web.Page" %>
 <%@ page import=" com.haisan.saleOA.domain.Good" %>
+<%@ page import=" com.haisan.saleOA.domain.GoodItem" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Home</title>
+<title>check新订单</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="left" />
@@ -56,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h1><a href="index.jsp">您好！ <span>欢迎使用</span></a></h1>
 			</div>
 			<div class="logo-icon text-center">
-				<a href="GoodServlet?method=AllGoods"><i class="lnr lnr-home"></i> </a>
+				<a href="index.jsp"><i class="lnr lnr-home"></i> </a>
 			</div>
 
 			<!--logo and iconic logo end-->
@@ -286,11 +287,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 					<div id="page-wrapper">
 				 <div class="classbuton">
-					<input class="btn btn-default " type="button" value="全部货品" onClick="allfood()"">
-					<input class="btn btn-default " type="button" value="蔬菜类" onClick="getVegetables()">
-					<input class="btn btn-default " type="button" value="肉类" onClick="getMeat()">
-					<input class="btn btn-default " type="button" value="主食类" onClick="getAtaplefood()">
-					<input class="btn btn-default " type="button" value="其他" onClick="getOther()"></div>
+					<input class="btn btn-default " type="button" value="全部货品" onClick="n_allfood()"">
+					<input class="btn btn-default " type="button" value="蔬菜类" onClick="n_getVegetables()">
+					<input class="btn btn-default " type="button" value="肉类" onClick="n_getMeat()">
+					<input class="btn btn-default " type="button" value="主食类" onClick="n_getAtaplefood()">
+					<input class="btn btn-default " type="button" value="其他" onClick="n_getOther()"></div>
 					
 				<div class="search-box">
 				
@@ -314,6 +315,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												new UISearch( document.getElementById( 'sb-search' ) );
 											</script>
 										<!-- //search-scripts -->
+										<form action="OrderServlet?method=toCheckSu" method="post">
 				 <div class="bs-example4" data-example-id="contextual-table">
 						<table class="table">
 						  <thead>
@@ -321,32 +323,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <th>货品编号</th>
 							  <th>货品名称</th>
 							  <th>单价</th>
-							  <th></th>
+							  <th>金额</th>
 							</tr>
 						  </thead>
 						  <tbody>
 						  
-					 <% Page<Good> pageGood = (Page)request.getAttribute("pageGood");
-					    List<Good> goods =pageGood.getList();//(List)request.getAttribute("pageGood");
-					    String ca_ji = (String)request.getAttribute("att_cate");//种类名
-					    String ca ="all";
-					    if(ca_ji != null)
-					       ca= ca_ji ;
+					<%  List<GoodItem> gooditem =  (List<GoodItem>)request.getAttribute("goods");
 					    String[] cla = {"success", "info"};
 					    int i = 0;
-					    for(Good g : goods ){  
+					    if(gooditem != null)
+					    for(GoodItem g : gooditem ){  
 					             %>
 							<tr class="<%=cla[i%2] %>">
-							  <th scope="row"><%=g.getGoodId() %></th>
-							  <td><%=g.getGoodName() %></td>
-							  <td><%=g.getGoodPrice()+"元/公斤" %></td>
-							  <td></td>
+							  <th scope="row"><%=g.getGood().getGoodId() %></th>
+							  <td><%=g.getGood().getGoodName() %></td>
+							  <td><%=g.getGood().getGoodPrice()+"元" %></td>
+							  <td>数量<input name="<%=g.getItemMoney() %>" type="text" width="20pd" size="4dp"/></td>
 							</tr><% i++;} %>
 							
 						  </tbody>
 						</table>
 					   </div>
-				 
+					   <input type="submit" value="确认">
+				 </form>
 				 
 				 <div class="mail-toolbar clearfix">
 								 <div class="float-left">
@@ -389,12 +388,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="clearfix"> </div>
 								</div>
 								<div class="float-right">
-									       	<div class="btn-group">
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getPrevPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getNextPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-											</div>
-										  
-											<span class="text-muted m-r-sm">当前第<%=pageGood.getPageNO()%>页 ，共<%=pageGood.getTotalPageNumber()%>页 </span>
+									       
 											<div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
 												<div class="btn-group">
 													<a class="btn btn-default dropdown-toggle"  >
@@ -414,11 +408,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 
 				 
 				 
-				 
-				 
-				 
-				 
-				 
+				  
 				 
 				 
 				

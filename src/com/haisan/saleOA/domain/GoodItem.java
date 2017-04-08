@@ -1,5 +1,7 @@
 package com.haisan.saleOA.domain;
 
+import java.text.DecimalFormat;
+
 public class GoodItem {
 
 	private Good good;
@@ -24,7 +26,11 @@ public class GoodItem {
 		this.amount = amount; 
 	}
 	
-	
+	public String getItemMoneyS(){
+		DecimalFormat    df   = new DecimalFormat("######0.00");
+		
+		return df.format(good.getGoodPrice() * amount);  
+	}
 	
 	
 	//获取单项总额

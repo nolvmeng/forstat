@@ -5,11 +5,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <jsp:include  page="/commons/copyright.jsp"/>
 <%@ page import=" com.haisan.saleOA.web.Page" %>
-<%@ page import=" com.haisan.saleOA.domain.Good" %>
+<%@ page import=" com.haisan.saleOA.domain.Customer" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Home</title>
+<title>Customers</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="left" />
@@ -62,10 +62,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--logo and iconic logo end-->
 			<div class="left-side-inner">
 
-				<!--sidebar nav start-->
+					<!--sidebar nav start-->
 					<ul class="nav nav-pills nav-stacked custom-nav">
 					<li><span>&nbsp;&nbsp;</span></li>
-						<li class="active"><a href="href="GoodServlet?method=back""><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
+						<li class="active"><a href="GoodServlet?method=back""><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
 						<li>
 							<a href="GoodServlet?method=AllGoods"><i class="fa fa-tasks"></i>
 								<span>货品管理</span></a>
@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<li><a href="">删除</a></li>
 								</ul>
 						</li>
-						  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
+					 	  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
 								<li><a href="">新订单</a> </li>
 								<li><a href="">查看订单</a> </li>
@@ -285,18 +285,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				</div>
 					<div id="page-wrapper">
-				 <div class="classbuton">
-					<input class="btn btn-default " type="button" value="全部货品" onClick="allfood()"">
-					<input class="btn btn-default " type="button" value="蔬菜类" onClick="getVegetables()">
-					<input class="btn btn-default " type="button" value="肉类" onClick="getMeat()">
-					<input class="btn btn-default " type="button" value="主食类" onClick="getAtaplefood()">
-					<input class="btn btn-default " type="button" value="其他" onClick="getOther()"></div>
-					
+				  	
 				<div class="search-box">
 				
 										<div id="sb-search" class="sb-search">
 										
-											<form name="form1" action="<%=path + "/servlet/GoodServlet?method=getAGood" %>">
+											<form name="form1" action="<%=path + "/servlet/CustomerServlet?method=getCus" %>">
 											
 												<input class="sb-search-input" placeholder="这里可以搜索" type="search" id="search" name="search">
 												<input class="sb-search-submit" type="submit" value="搜索" ">
@@ -307,7 +301,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 										<!-- search-scripts -->
 										
-										<script src="<%=path%>/js/nextpage.js"></script>
 										<script src="<%=path%>/js/classie.js"></script>
 										<script src="<%=path%>/js/uisearch.js"></script>
 											<script>
@@ -318,29 +311,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<table class="table">
 						  <thead>
 							<tr>
-							  <th>货品编号</th>
-							  <th>货品名称</th>
-							  <th>单价</th>
-							  <th></th>
+							  <th>客户编号</th>
+							  <th>客户名称</th>
+							  <th>客户地址</th>
+							  <th>电话号码</th>
 							</tr>
 						  </thead>
 						  <tbody>
 						  
-					 <% Page<Good> pageGood = (Page)request.getAttribute("pageGood");
-					    List<Good> goods =pageGood.getList();//(List)request.getAttribute("pageGood");
-					    String ca_ji = (String)request.getAttribute("att_cate");//种类名
-					    String ca ="all";
-					    if(ca_ji != null)
-					       ca= ca_ji ;
+					 <% Page<Customer> pageCus = (Page)request.getAttribute("pageCus");
+					    List<Customer> Cus =pageCus.getList(); 
 					    String[] cla = {"success", "info"};
 					    int i = 0;
-					    for(Good g : goods ){  
+					    for(Customer g : Cus ){  
 					             %>
 							<tr class="<%=cla[i%2] %>">
-							  <th scope="row"><%=g.getGoodId() %></th>
-							  <td><%=g.getGoodName() %></td>
-							  <td><%=g.getGoodPrice()+"元/公斤" %></td>
-							  <td></td>
+							  <th scope="row"><%=g.getCustomerId() %></th>
+							  <td><%=g.getCustomerName() %></td>
+							  <td><%=g.getAddress() %></td>
+							  <td><%=g.getPhoneNum() %></td>
 							</tr><% i++;} %>
 							
 						  </tbody>
@@ -390,11 +379,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="float-right">
 									       	<div class="btn-group">
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getPrevPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getNextPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
+												<a href="CustomerServlet?method=getCus&pageNO=<%=pageCus.getPrevPage()%>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
+												<a href="CustomerServlet?method=getCus&pageNO=<%=pageCus.getNextPage()%>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
 											</div>
 										  
-											<span class="text-muted m-r-sm">当前第<%=pageGood.getPageNO()%>页 ，共<%=pageGood.getTotalPageNumber()%>页 </span>
+											<span class="text-muted m-r-sm">当前第<%=pageCus.getPageNO()%>页 ，共<%=pageCus.getTotalPageNumber()%>页 </span>
 											<div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
 												<div class="btn-group">
 													<a class="btn btn-default dropdown-toggle"  >

@@ -2,6 +2,7 @@ package com.haisan.saleOA.dao;
 
 import java.util.List;
 
+import com.haisan.saleOA.domain.Good;
 import com.haisan.saleOA.domain.GoodItem;
 import com.haisan.saleOA.domain.Shipment;
 
@@ -37,5 +38,23 @@ public interface ShipmentDAO {
 	 * @param String orderId 订单号
 	 **/
 	public abstract void saveBatch(List<GoodItem> goods, String orderId);
+	
+	
+	/**
+	 * 根据订单号orderId获取货品Id List
+	 * @param String : orderId
+	 * @return List<String> 
+	 **/
+	public abstract List<String> getgetListGood(String orderId);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

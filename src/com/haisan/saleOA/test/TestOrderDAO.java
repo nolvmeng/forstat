@@ -30,17 +30,17 @@ public class TestOrderDAO {
 		System.out.println(re.toString());		
 	}//测试通过
 	
-	public void test4(){
+	/*public void test4(){
 		List<Order> orderList = OO.getOrderList();
 		for(Order o: orderList){
 			System.out.println(o.toString());
 		}
 		
 	}//测试通过
-	
+*/	
 	
 	 public  void test5(){
-		 double total  = OO.getTotal("O12345");
+		 double total  = OO.getTotal("12");
 		 System.out.println(total);
 	 }//测试通过
 	

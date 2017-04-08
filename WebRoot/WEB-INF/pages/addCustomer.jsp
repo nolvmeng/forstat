@@ -5,11 +5,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <jsp:include  page="/commons/copyright.jsp"/>
 <%@ page import=" com.haisan.saleOA.web.Page" %>
-<%@ page import=" com.haisan.saleOA.domain.Good" %>
+<%@ page import=" com.haisan.saleOA.domain.Customer" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Home</title>
+<title>Customers</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="left" />
@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h1><a href="index.jsp">您好！ <span>欢迎使用</span></a></h1>
 			</div>
 			<div class="logo-icon text-center">
-				<a href="GoodServlet?method=AllGoods"><i class="lnr lnr-home"></i> </a>
+				<a href="GoodServlet?method=back"><i class="lnr lnr-home"></i> </a>
 			</div>
 
 			<!--logo and iconic logo end-->
@@ -65,12 +65,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!--sidebar nav start-->
 					<ul class="nav nav-pills nav-stacked custom-nav">
 					<li><span>&nbsp;&nbsp;</span></li>
-						<li class="active"><a href="href="GoodServlet?method=back""><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
+						<li class="active"><a href="GoodServlet?method=back"><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
 						<li>
 							<a href="GoodServlet?method=AllGoods"><i class="fa fa-tasks"></i>
 								<span>货品管理</span></a>
 							  <ul class="sub-menu-list">
-									<li><a href="GoodServlet?method=findjsp">添加</a> </li>
+									<li><a href="GoodServlet?method=AllGoods">添加</a> </li>
 									<li><a href="">修改</a></li>
 									<li><a href="">删除</a></li>
 								</ul>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<li><a href=""></a> </li>
 							</ul>           
 							</li>  
-						<li><a href="#"><i class="lnr lnr-users"></i> <span>&nbsp;&nbsp;用户管理</span></a>
+						<li class="menu-list"><a href="#"><i class="lnr lnr-users"></i> <span>&nbsp;&nbsp;用户管理</span></a>
 						  <ul class="sub-menu-list">
 								<li><a href="">管理操作员</a> </li>
 								<li><a href="">修改用户信息</a> </li>
@@ -285,132 +285,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				</div>
 					<div id="page-wrapper">
-				 <div class="classbuton">
-					<input class="btn btn-default " type="button" value="全部货品" onClick="allfood()"">
-					<input class="btn btn-default " type="button" value="蔬菜类" onClick="getVegetables()">
-					<input class="btn btn-default " type="button" value="肉类" onClick="getMeat()">
-					<input class="btn btn-default " type="button" value="主食类" onClick="getAtaplefood()">
-					<input class="btn btn-default " type="button" value="其他" onClick="getOther()"></div>
-					
-				<div class="search-box">
+				  	
 				
-										<div id="sb-search" class="sb-search">
-										
-											<form name="form1" action="<%=path + "/servlet/GoodServlet?method=getAGood" %>">
-											
-												<input class="sb-search-input" placeholder="这里可以搜索" type="search" id="search" name="search">
-												<input class="sb-search-submit" type="submit" value="搜索" ">
-											
-												<span class="sb-icon-search"> </span>
-											</form>
-										</div>
+									<div class="graphs">
+									<h3 class="blank1">新增客户</h3>
+									<div class="tab-content">
+									<form class="form-horizontal" action="CustomerServlet" method="post">
+									<input type="hidden" name="method" value="addCustomer">  
+									<div class="form-group">
+									<label for="idinput" class="col-sm-2 control-label">客户ID：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="idinput" placeholder="输入客户ID" name="cusId">
+									</div>
+									</div>
+									<div class="form-group">
+									<label for="nameinput" class="col-sm-2 control-label">客户姓名：</label>
+									<div class="col-sm-8">
+										<input  type="text" class="form-control1" id="nameinput" placeholder="输入客户姓名" name="cusName">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="addressinput" class="col-sm-2 control-label">客户地址：</label>
+									<div class="col-sm-8">
+										<input  type="text" class="form-control1" id="addressinput" placeholder="输入客户地址" name="cusAddress">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="phoneinput" class="col-sm-2 control-label">客户电话：</label>
+									<div class="col-sm-8">
+										<input  type="text" class="form-control1" id="phoneinput" placeholder="输入客户电话" name="cusPhone">
+									</div>
+								</div>
+								<div class="panel-footer">
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<button class="btn-success btn">提交</button>
+									</div>
+									</div>
+									</div>
+									</form>
+									</div>
 									</div>
 										<!-- search-scripts -->
 										
-										<script src="<%=path%>/js/nextpage.js"></script>
 										<script src="<%=path%>/js/classie.js"></script>
 										<script src="<%=path%>/js/uisearch.js"></script>
 											<script>
 												new UISearch( document.getElementById( 'sb-search' ) );
 											</script>
 										<!-- //search-scripts -->
-				 <div class="bs-example4" data-example-id="contextual-table">
-						<table class="table">
-						  <thead>
-							<tr>
-							  <th>货品编号</th>
-							  <th>货品名称</th>
-							  <th>单价</th>
-							  <th></th>
-							</tr>
-						  </thead>
-						  <tbody>
-						  
-					 <% Page<Good> pageGood = (Page)request.getAttribute("pageGood");
-					    List<Good> goods =pageGood.getList();//(List)request.getAttribute("pageGood");
-					    String ca_ji = (String)request.getAttribute("att_cate");//种类名
-					    String ca ="all";
-					    if(ca_ji != null)
-					       ca= ca_ji ;
-					    String[] cla = {"success", "info"};
-					    int i = 0;
-					    for(Good g : goods ){  
-					             %>
-							<tr class="<%=cla[i%2] %>">
-							  <th scope="row"><%=g.getGoodId() %></th>
-							  <td><%=g.getGoodName() %></td>
-							  <td><%=g.getGoodPrice()+"元/公斤" %></td>
-							  <td></td>
-							</tr><% i++;} %>
-							
-						  </tbody>
-						</table>
-					   </div>
+				
 				 
 				 
-				 <div class="mail-toolbar clearfix">
-								 <div class="float-left">
-									<div class="btn btn_1 btn-default mrg5R">
-									   <i class="fa fa-refresh"> </i>
-									</div>
-									<div class="dropdown">
-										<a href="#" title="" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
-											<i class="fa fa-cog icon_8"></i>
-											<i class="fa fa-chevron-down icon_8"></i>
-										<div class="ripple-wrapper"></div></a>
-										<ul class="dropdown-menu float-right">
-											<li>
-												<a href="#" title="">
-													<i class="fa fa-pencil-square-o icon_9"></i>
-													Edit
-												</a>
-											</li>
-											<li>
-												<a href="#" title="">
-													<i class="fa fa-calendar icon_9"></i>
-													Schedule
-												</a>
-											</li>
-											<li>
-												<a href="#" title="">
-													<i class="fa fa-download icon_9"></i>
-													Download
-												</a>
-											</li>
-											<li class="divider"></li>
-											<li>
-												<a href="#" class="font-red" title="">
-													<i class="fa fa-times" icon_9=""></i>
-													Delete
-												</a>
-											</li>
-										</ul>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="float-right">
-									       	<div class="btn-group">
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getPrevPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getNextPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-											</div>
-										  
-											<span class="text-muted m-r-sm">当前第<%=pageGood.getPageNO()%>页 ，共<%=pageGood.getTotalPageNumber()%>页 </span>
-											<div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
-												<div class="btn-group">
-													<a class="btn btn-default dropdown-toggle"  >
-													<i class="fa fa-folder">首页</i></a>
-													
-												</div>
-												<div class="btn-group">
-													<a class="btn btn-default dropdown-toggle" >
-													<i class="fa fa-tags">尾页</i> </a>
-												</div>
-											</div>
-										
-										
-									
-								</div>
-							   </div>
+				
 				 
 				 
 				 
