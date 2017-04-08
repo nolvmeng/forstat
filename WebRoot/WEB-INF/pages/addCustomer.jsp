@@ -70,14 +70,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a href="GoodServlet?method=AllGoods"><i class="fa fa-tasks"></i>
 								<span>货品管理</span></a>
 							  <ul class="sub-menu-list">
-									<li><a href="GoodServlet?method=AllGoods">添加</a> </li>
+									<li><a href="GoodServlet?method=findjsp">添加</a> </li>
 									<li><a href="">修改</a></li>
 									<li><a href="">删除</a></li>
 								</ul>
 						</li>
-						  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
+					  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
-								<li><a href="">新订单</a> </li>
+								<li><a href="GoodServlet?method=AllGoods&new=is">新订单</a> </li>
 								<li><a href="">查看订单</a> </li>
 							</ul>
 							</li>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<li><a href=""></a> </li>
 							</ul>           
 							</li>  
-						<li class="menu-list"><a href="#"><i class="lnr lnr-users"></i> <span>&nbsp;&nbsp;用户管理</span></a>
+						<li><a href="#"><i class="lnr lnr-users"></i> <span>&nbsp;&nbsp;用户管理</span></a>
 						  <ul class="sub-menu-list">
 								<li><a href="">管理操作员</a> </li>
 								<li><a href="">修改用户信息</a> </li>

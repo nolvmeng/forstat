@@ -183,13 +183,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						  <tbody>
 						  
 					 <% Page<OrderItem> pageOrder = (Page)request.getAttribute("pageOrder");
+					    List<OrderItem> orderItems = new ArrayList(); 
 					  //  Map<String, Double> total =(Map)request.getAttribute("total");
-					  List<OrderItem> orderItems = pageOrder.getList();
+					  if(request.getAttribute("pageOrder")!=null)
+					    orderItems = pageOrder.getList();
 					    
 					   // List<Order> orders = o.getOrder()
 					      
 					    String[] cla = {"success", "info"};
 					    int i = 0;
+					    
 					   for(OrderItem o : orderItems){
 					         session.setAttribute(o.getOrder().getOrderId(), o);   %>
 							<tr class="<%=cla[i%2] %>">

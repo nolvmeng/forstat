@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!--sidebar nav start-->
 					<ul class="nav nav-pills nav-stacked custom-nav">
 					<li><span>&nbsp;&nbsp;</span></li>
-						<li class="active"><a href="href="GoodServlet?method=back""><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
+						<li class="active"><a href="GoodServlet?method=back"><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
 						<li>
 							<a href="GoodServlet?method=AllGoods"><i class="fa fa-tasks"></i>
 								<span>货品管理</span></a>
@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 						  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
-								<li><a href="">新订单</a> </li>
+								<li><a href="GoodServlet?method=AllGoods&new=is">新订单</a> </li>
 								<li><a href="">查看订单</a> </li>
 							</ul>
 							</li>
@@ -321,6 +321,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <th>货品编号</th>
 							  <th>货品名称</th>
 							  <th>单价</th>
+							  <th>库存</th>
 							  <th></th>
 							</tr>
 						  </thead>
@@ -334,13 +335,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					       ca= ca_ji ;
 					    String[] cla = {"success", "info"};
 					    int i = 0;
-					    for(Good g : goods ){  
-					             %>
+					     for(Good g : goods ){  
+			                    session.setAttribute(g.getGoodId(), g) ;            %>
 							<tr class="<%=cla[i%2] %>">
-							  <th scope="row"><%=g.getGoodId() %></th>
+							  <th scope="row" ><%=g.getGoodId() %></th>
 							  <td><%=g.getGoodName() %></td>
 							  <td><%=g.getGoodPrice()+"元/公斤" %></td>
-							  <td></td>
+							  <td><%=g.getReserve()+"公斤" %></td>
+							  <td><a href="GoodServlet?method=changejsp&id=<%=g.getGoodId() %>" class="btn btn-default">修改</a><a href="GoodServlet?method=delGood&id=<%=g.getGoodId()  %>" class="btn btn-default">删除</a></td>
 							</tr><% i++;} %>
 							
 						  </tbody>

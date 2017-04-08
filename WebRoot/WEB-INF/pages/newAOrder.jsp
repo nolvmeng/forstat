@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!--sidebar nav start-->
 					<ul class="nav nav-pills nav-stacked custom-nav">
 					<li><span>&nbsp;&nbsp;</span></li>
-						<li class="active"><a href="href="GoodServlet?method=back""><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
+						<li class="active"><a href="GoodServlet?method=back"><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
 						<li>
 							<a href="GoodServlet?method=AllGoods"><i class="fa fa-tasks"></i>
 								<span>货品管理</span></a>
@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<li><a href="">删除</a></li>
 								</ul>
 						</li>
-						  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
+					  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
 								<li><a href="GoodServlet?method=AllGoods&new=is">新订单</a> </li>
 								<li><a href="">查看订单</a> </li>
@@ -183,6 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <th>货品编号</th>
 							  <th>货品名称</th>
 							  <th>单价</th>
+							  <th>库存</th>
 							  <th></th>
 							</tr>
 						  </thead>
@@ -190,11 +191,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						  
 					 <% Page<Good> pageGood = (Page)request.getAttribute("pageGood");
 					    List<GoodItem> gooditem= new ArrayList<GoodItem>();
-					    List<Good> goods =pageGood.getList();//(List)request.getAttribute("pageGood");
+					    List<Good> goods = pageGood.getList();//(List)request.getAttribute("pageGood");
 				    	if (request.getAttribute("goods") != null){
 					             gooditem = (List<GoodItem>)request.getAttribute("goods");
-					             request.setAttribute("good", gooditem);
-					             
+					           //  request.setAttribute("good", gooditem);
+					               session.setAttribute("good", gooditem);
 					             }
 					    
 					    String ca_ji = (String)request.getAttribute("att_cate");//种类名
@@ -203,13 +204,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					       ca= ca_ji ;
 					    String[] cla = {"success", "info"};
 					    int i = 0;
-					    Map<String, Good> map = new HashMap<String, Good>(12);
+					   // Map<String, Good> map = new HashMap<String, Good>(12);
 					    for(Good g : goods ){  
 					             %>
 							<tr class="<%=cla[i%2] %>">
 							  <th scope="row"><a href="OrderServlet?method=addGood&Id=<%=g.getGoodId() %>"><%=g.getGoodId() %></a></th>
 							  <td><%=g.getGoodName() %></td>
 							  <td><%=g.getGoodPrice()+"元/公斤" %></td>
+							  <td><%=g.getReserve()+"公斤" %></td>
 							  <td>数量<input type="text" width="20pd" size="4dp"/></td>
 							</tr><% i++;} %>
 							

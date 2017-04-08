@@ -79,7 +79,25 @@ public interface GoodDAO {
       *@param String: category种类
       *@return page<Good>
       **/
+    
     public abstract List<Good> getCaPageGood(int start, int end, String category);
 
+    
+    /**
+     * 修改goodId
+     *@param String:oldId 旧的 goodId
+     *@param String:newId 新的 goodId
+     **/
+    public abstract void updateId(String oldId, String newId);
+    
+    
+    /**
+     * 删除某货品
+     *@param String:oldId 旧的 goodId
+     *@param String:newId 新的 goodId
+     * @return 
+     **/
+    public abstract void delGood(String goodId);
+    
 
 }

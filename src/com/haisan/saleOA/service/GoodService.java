@@ -81,14 +81,24 @@ public class GoodService {
 	} 
 	
 	 
+	//获取货品Id
+	public void updateId(String oId, String nId){
+		goodDAOimpl.updateId(oId, nId);
+		
+	}
 	
 	
-	
-	//增加货品
 	
 	//修改货品
+	public Good setGood(Good good){
+		goodDAOimpl.setGood(good);
+		return good;
+		
+	}
 	
 	//删除货品
-	
+	public void delGood(String goodId){
+		goodDAOimpl.delGood(goodId);
+	}
 
 }

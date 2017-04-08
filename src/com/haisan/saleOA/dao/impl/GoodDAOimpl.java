@@ -21,9 +21,10 @@ public class GoodDAOimpl extends BaseDAO<Good> implements GoodDAO  {
 	public int setGood( Good good) {
 		String sql = "UPDATE goods SET goodId=?, goodName=?, goodPrice=?, productDate=?, reserve=?"
 				+ ", category=? WHERE goodId = ?";
-		System.out.println(sql);
-		update(sql, good.getGoodId(),good.getGoodId(), good.getGoodName(), good.getGoodPrice(), good.getProductDate()
+		
+		update(sql, good.getGoodId(), good.getGoodName(), good.getGoodPrice(), good.getProductDate()
 				, good.getReserve(),good.getCategory(),good.getGoodId());
+		System.out.println(sql);
 		return 0;
 	}
 
@@ -78,6 +79,20 @@ public class GoodDAOimpl extends BaseDAO<Good> implements GoodDAO  {
 	public List<Good> getCaPageGood(int start, int pageSize, String category) {
 		String sql = "SELECT * FROM goods WHERE category=? ORDER BY goodId ASC LIMIT ? ,?"; 
 		return queryForList(sql, category, start, pageSize);
+		
+	}
+
+	@Override
+	public void updateId(String oldId, String newId) {
+		String sql = "UPDATE goods SET goodId=?  WHERE goodId = ?"; 
+		update(sql, newId,oldId);
+		
+	}
+
+	@Override
+	public void delGood(String goodId) {
+		String sql="DELETE FROM goods WHERE goodId=? ";
+		update(sql, goodId);
 		
 	}
 

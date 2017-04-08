@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 					  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
-								<li><a href="">新订单</a> </li>
+								<li><a href="GoodServlet?method=AllGoods&new=is">新订单</a> </li>
 								<li><a href="">查看订单</a> </li>
 							</ul>
 							</li>
@@ -157,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<form name="form1" action="<%=path + "/servlet/GoodServlet?method=getAGood" %>">
 											
 												<input class="sb-search-input" placeholder="这里可以搜索" type="search" id="search" name="search">
-												<input class="sb-search-submit" type="submit" value="搜索" ">
+												<input class="sb-search-submit" type="submit" value="搜索" >
 											
 												<span class="sb-icon-search"> </span>
 											</form>

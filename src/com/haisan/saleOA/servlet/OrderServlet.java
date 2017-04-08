@@ -67,6 +67,7 @@ public class OrderServlet extends HttpServlet {
 		Page<OrderItem> pageOrder = new Page<OrderItem>(1);
 		int pageNO = 1; int pageSize = 10;
 		User user = (User) request.getSession().getAttribute("userw");
+		if(user == null)  response.sendRedirect("/saleOA/index.jsp");
 		System.out.println(user.getUsername());
 		pageOrder = OService.getPageOrder(pageNO, pageSize, user.getUserId());
 		if(pageOrder.getList() != null) System.out.println("已进入Or"+user.getUserId());
@@ -86,13 +87,14 @@ public class OrderServlet extends HttpServlet {
 	
 	
 	public  void toCheck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		List<GoodItem> gooditem =(List<GoodItem>) request.getAttribute("good");
-	           if(request.getAttribute("good")!= null) {
+		 gooditem =(List<GoodItem>) request.getAttribute("good");
+	           if(request.getSession().getAttribute("good")!= null) {
 	        	   System.out.println("xiyan");
-	               request.setAttribute("goods", gooditem);
+	              // request.setAttribute("goods", gooditem);
 	               }
 	           request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);
 	           gooditem = new ArrayList<GoodItem>();//初始化以达到清除效果
+	           request.setAttribute("goods", gooditem);
 	}
 	          // gooditem.clear();
 	
@@ -107,6 +109,9 @@ public class OrderServlet extends HttpServlet {
 		OService.addOrder(or);
 		gooditem.add(new GoodItem(good,23) );
 		SService.addBatch(gooditem, "T19999");*/
+		
+		
+		
 		
 		request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);
 	}

@@ -83,8 +83,10 @@ public class GoodServlet extends HttpServlet {
 		  
 		  if(request.getParameter("new")==null)
 		     request.getRequestDispatcher("/WEB-INF/pages/showGood.jsp").forward(request, response);
-		  else if(request.getParameter("tocheck")==null)
+		  else if(request.getParameter("tocheck")==null){
+			 // request.getSession().setAttribute("good", null);
 			 request.getRequestDispatcher("/WEB-INF/pages/newAOrder.jsp").forward(request, response);
+		  }
 		  /*else
 			  request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);*/
 	}
@@ -103,6 +105,47 @@ public class GoodServlet extends HttpServlet {
 	public void findjsp(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
 		request.getRequestDispatcher("/WEB-INF/pages/addAGood.jsp").forward(request, response);
 	}
+	
+	
+	//跳转修改货品
+			public void changejsp(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+				HttpSession session = request.getSession();
+				String id = request.getParameter("id");
+				request.setAttribute("id", id);
+				if(session.getAttribute(id) != null)
+					System.out.println(id);
+				//System.out.println("ss");
+				request.getRequestDispatcher("/WEB-INF/pages/changeAGood.jsp").forward(request, response);
+			}
+			
+	//提交修改货品
+		public void setGood(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+			HttpSession session = request.getSession();
+			String id=(String) session.getAttribute("id");
+			String goodId = request.getParameter("goodId");
+			String goodName = request.getParameter("goodName");
+			String goodPrice = request.getParameter("goodPrice");
+			String goodNum = request.getParameter("goodNum");
+			String slCategory = request.getParameter("slCategory");
+			System.out.println(id);
+			int n=Integer.parseInt(goodNum);
+			float p=Float.parseFloat(goodPrice);
+			goodService.updateId(id, goodId);
+			
+				Good setGood=new Good();
+				setGood.setGoodId(goodId);
+				setGood.setGoodName(goodName);
+				setGood.setGoodPrice(p);
+				setGood.setReserve(n);
+				setGood.setCategory(slCategory); 
+				goodService.setGood(setGood);
+				System.out.println(goodId);
+				AllGoods(request,response);
+		}
+	
+	
+	
+	
 	
 	//添加货品
 	public void addGood(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -133,6 +176,19 @@ public class GoodServlet extends HttpServlet {
 			out.println("</script>");
 		}
 	}
+	
+	//删除货品
+		public void delGood(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+			HttpSession session = request.getSession();
+			String id = request.getParameter("id");
+			request.setAttribute("id", id);
+			if(session.getAttribute(id) != null)
+				System.out.println(id);
+			if(id!=null)
+				goodService.delGood(id);
+			AllGoods(request,response);
+		}
+	
 	
 	//返回
 		public void back(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{

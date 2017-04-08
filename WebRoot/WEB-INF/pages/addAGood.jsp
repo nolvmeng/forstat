@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 					  <li><a href="OrderServlet?method=getOrder&userId=${sessionScope.userw.userId}"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
-								<li><a href="">新订单</a> </li>
+								<li><a href="GoodServlet?method=AllGoods&new=is">新订单</a> </li>
 								<li><a href="">查看订单</a> </li>
 							</ul>
 							</li>
@@ -324,7 +324,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<option value="vegetable">vegetable</option>
 											<option value="meat">meat</option>
 											<option value="main">main</option>
-											<option value="">other</option>
+                                            <option value="other">other</option>
 										</select>
 									</div>
 								</div>

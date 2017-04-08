@@ -46,4 +46,24 @@ function n_getAtaplefood(){
 function n_getOther(){
 	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=other&new=is";
 }
-
+function show(){
+	
+    var x=event.clientX;
+    var y=event.clientY;
+    document.getElementById("pic").style.top=y+50;
+    document.getElementById("pic").style.left=x;
+    document.getElementById("pic").style.visibility="visible";
+    var formDiv="<form action='#'>";
+    formDiv+="货品编号:<input type='text' name='user' /><br>";
+    formDiv+="货品名称:<input type='password' name='pass' /><br><br>";     
+    formDiv+="单价:<input type='password' name='pass' /><br><br>";
+       formDiv+="<input type='submit' value='提交' onclick='hide()' /></form>";     
+    document.getElementById("pic").innerHTML=formDiv;
+}
+ 
+function hide(){
+    document.getElementById("pic").style.visibility="hidden";
+}
+function change(){
+	location.href="/saleOA/servlet/GoodServlet?method=changejsp&id=<%g.getGoodId()%>"
+}
