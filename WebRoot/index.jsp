@@ -1,3 +1,4 @@
+
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
@@ -47,44 +48,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="graphs">
 					<div class="sign-in-form">
 						<div class="sign-in-form-top">
-							<p><span>Sign In to</span> <a href="index.html">Admin</a></p>
+							<p> <a href="">登录</a></p>
 						</div>
+						
+						  
+						  
+						  
+						  
+						 
 						<div class="signin">
 							<div class="signin-rit">
-								<span class="checkbox1">
-									 <label >Forgot Password ?</label>
-								</span>
-								<p><a href="#">Click Here</a> </p>
+							<%   boolean qur = true ;
+						 	  if(session.getAttribute("suss") !=null)
+						     qur=(Boolean)session.getAttribute("suss");; 
+	                  	   String bu = "";	 
+						  if (!qur) bu="用户名错误或密码错误";%>
+						   <stronger><%=bu %></stronger>  
+							
+								<p><a href="#">忘记密码？</a> </p>
+								
 								<div class="clearfix"> </div>
 							</div>
 							<form action=<%=path + "/servlet/UserServlet?method=login" %> method="post">
 							<div class="log-input">
 								<div class="log-input-left">
-								   <input type="text" name="id"class="user" value="Yourname" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email address:';}"/>
+								   <input type="text" name="id"class="user" value="用户名" onfocus="this.value = '';" />
 								</div>
-								<span class="checkbox2">
-									 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i></label>
-								</span>
+								
 								<div class="clearfix"> </div>
 							</div>
 							<div class="log-input">
 								<div class="log-input-left">
-								   <input type="password" name="password" class="lock" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email address:';}"/>
+								   <input type="password" name="password" class="lock" value="password" onfocus="this.value = '';" />
 								</div>
-								<span class="checkbox2">
-									 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i></label>
-								</span>
+								
 								<div class="clearfix"> </div>
 							</div>
-							<input type="submit" value="Login to your account">
+							<input type="submit" value="登录">
 						</form>	 
 						</div>
-						<div class="new_people">
-							<h4>For New People</h4>
-							<p>Having hands on experience in creating innovative designs,I do offer design 
-								solutions which harness.</p>
-							<a href="sign-up.html">Register Now!</a>
-						</div>
+						
 					</div>
 				</div>
 			</div>

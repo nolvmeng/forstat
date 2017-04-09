@@ -16,7 +16,7 @@ public class UserServiceTest {
 
 		UserService userService = new UserService();
 		User user = userService.getUser("洪海山");
-		System.out.println(user.getUserName());
+		System.out.println(user.getUsername());
 		
 		Boolean is = userService.isLogin("洪海山", "1234");
 		System.out.println(is);

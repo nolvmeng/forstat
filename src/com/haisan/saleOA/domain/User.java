@@ -12,10 +12,10 @@ public class User {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getUserName() {
+	public String getUsername() {
 		return username;
 	}
-	public void setUserName( String username) {
+	public void setUsername( String username) {
 		this.username = username;
 	}
 	public String getPassword() {
@@ -24,7 +24,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPositionl() {
+	public String getPosition() {
 		return position;
 	}
 	public void setPosition(String position) {

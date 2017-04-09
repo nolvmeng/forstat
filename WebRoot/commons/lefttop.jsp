@@ -3,6 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<jsp:include  page="copyright.jsp"/>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -23,6 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- lined-icons -->
 <link rel="stylesheet" href="<%=path%>/css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
+<link rel="stylesheet" href="<%=path%>/css/main.css" type='text/css' />
 <!-- chart -->
 <script src="<%=path%>/js/Chart.js"></script>
 <!-- //chart -->
@@ -43,17 +45,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head> 
    
- <body class="sticky-header left-side-collapsed"  onload="initMap()">
+ <body class="sticky-header left-side-collapsed">
     <section>
     <!-- left side start-->
 		<div class="left-side sticky-left-side">
 
 			<!--logo and iconic logo start-->
 			<div class="logo">
-				<h1><a href="file:///E|/b项目实训/cpts_547_va/index.html">Easy <span>Admin</span></a></h1>
+				<h1><a href="index.jsp">您好！ <span>欢迎使用</span></a></h1>
 			</div>
 			<div class="logo-icon text-center">
-				<a href="file:///E|/b项目实训/cpts_547_va/index.html"><i class="lnr lnr-home"></i> </a>
+				<a href="index.jsp"><i class="lnr lnr-home"></i> </a>
 			</div>
 
 			<!--logo and iconic logo end-->
@@ -61,37 +63,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<!--sidebar nav start-->
 					<ul class="nav nav-pills nav-stacked custom-nav">
-						<li class="active"><a href="file:///E|/b项目实训/cpts_547_va/index.html"><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
+					<li><span>&nbsp;&nbsp;</span></li>
+						<li class="active"><a href="index.jsp"><i class="lnr lnr-power-switch"></i><span>返回</span></a></li>
 						<li class="menu-list">
-							<a href="#"><i class="lnr lnr-cog"></i>
-								<span>Components</span></a>
+							<a href="#"><i class="fa fa-tasks"></i>
+								<span>货品管理</span></a>
 							  <ul class="sub-menu-list">
-									<li><a href="file:///E|/b项目实训/cpts_547_va/grids.html">Grids</a> </li>
-									<li><a href="file:///E|/b项目实训/cpts_547_va/widgets.html">Widgets</a></li>
+									<li><a href="">添加</a> </li>
+									<li><a href="">修改</a></li>
+									<li><a href="">删除</a></li>
 								</ul>
 						</li>
-					  <li><a href="file:///E|/b项目实训/cpts_547_va/forms.html"><i class="lnr lnr-spell-check"></i> <span>Forms</span></a></li>
-					  <li><a href="file:///E|/b项目实训/cpts_547_va/tables.html"><i class="lnr lnr-menu"></i> <span>Tables</span></a></li>              
-						<li class="menu-list"><a href="#"><i class="lnr lnr-envelope"></i> <span>MailBox</span></a>
+					  <li><a href=""><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;出货管理</span></a>
+					  <ul class="sub-menu-list">
+								<li><a href=""></a> </li>
+								<li><a href=""></a> </li>
+							</ul>
+							</li>
+					  <li><a href=""><i class="lnr lnr-user"></i> <span>&nbsp;&nbsp;客户管理</span></a> 
+					  <ul class="sub-menu-list">
+								<li><a href=""></a> </li>
+								<li><a href=""></a> </li>
+							</ul>           
+							</li>  
+						<li class="menu-list"><a href="#"><i class="lnr lnr-users"></i> <span>&nbsp;&nbsp;操作员管理</span></a>
 						  <ul class="sub-menu-list">
-								<li><a href="file:///E|/b项目实训/cpts_547_va/inbox.html">Inbox</a> </li>
-								<li><a href="file:///E|/b项目实训/cpts_547_va/compose-mail.html">Compose Mail</a></li>
+								<li><a href=""></a> </li>
+								<li><a href=""></a> </li>
 							</ul>
 						</li>      
-						<li class="menu-list"><a href="#"><i class="lnr lnr-indent-increase"></i> <span>Menu Levels</span></a>  
-						  <ul class="sub-menu-list">
-								<li><a href="file:///E|/b项目实训/cpts_547_va/charts.html">Basic Charts</a> </li>
-							</ul>
-						</li>
-					  <li><a href="file:///E|/b项目实训/cpts_547_va/codes.html"><i class="lnr lnr-pencil"></i> <span>Typography</span></a></li>
-					  <li><a href="file:///E|/b项目实训/cpts_547_va/media.html"><i class="lnr lnr-select"></i> <span>Media Css</span></a></li>
-						<li class="menu-list"><a href="#"><i class="lnr lnr-book"></i>  <span>Pages</span></a> 
-						  <ul class="sub-menu-list">
-								<li><a href="file:///E|/b项目实训/cpts_547_va/sign-in.html">Sign In</a> </li>
-								<li><a href="file:///E|/b项目实训/cpts_547_va/sign-up.html">Sign Up</a></li>
-								<li><a href="file:///E|/b项目实训/cpts_547_va/blank_page.html">Blank Page</a></li>
-							</ul>
-						</li>
+						
 					</ul>
 				<!--sidebar nav end-->
 			</div>
@@ -156,15 +157,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								  <div class="search-box">
 										<div id="sb-search" class="sb-search">
 											<form>
-												<input class="sb-search-input" placeholder="Enter your search term..." type="search" id="search">
+												<input class="sb-search-input" placeholder="这里可以搜索" type="search" id="search">
 												<input class="sb-search-submit" type="submit" value="">
 												<span class="sb-icon-search"> </span>
 											</form>
 										</div>
 									</div>
 										<!-- search-scripts -->
-										<script src="<%=path %>/js/classie.js"></script>
-										<script src="<%=path %>/js/uisearch.js"></script>
+										<script src="<%=path%>/js/classie.js"></script>
+										<script src="<%=path%>/js/uisearch.js"></script>
 											<script>
 												new UISearch( document.getElementById( 'sb-search' ) );
 											</script>
@@ -271,7 +272,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<li class="dropdown profile_details_drop">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 									<div class="profile_img">	
-										<span style="background:url(images/1.jpg) no-repeat center"> </span> 
+										 
 										 <div class="user-name">
 											<p>Michael<span>Administrator</span></p>
 										 </div>
@@ -281,30 +282,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>	
 								</a>
 								<ul class="dropdown-menu drp-mnu">
-									<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
-									<li> <a href="#"><i class="fa fa-user"></i>Profile</a> </li> 
-									<li> <a href="file:///E|/b项目实训/cpts_547_va/sign-up.html"><i class="fa fa-sign-out"></i> Logout</a> </li>
+									<li> <a href="#"><i class="fa fa-cog"></i> 设置</a> </li> 
+									<li> <a href="#"><i class="fa fa-user"></i>个人信息</a> </li> 
+									<li> <a href="file:///E|/b项目实训/cpts_547_va/sign-up.html"><i class="fa fa-sign-out"></i>登出</a> </li>
 								</ul>
 							</li>
 							
 							<div class="clearfix"> </div>
 						</ul>
-					</div>
+				
+			 <!--body wrapper end-->
+		</div>
 				<tianqi>
-				<div class="weather">
-				<div class="iframe">
-				</div>
+				<div id="weather">
+				<a href="http://www.baidu.com/s?ie=utf-8&amp;wd=%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F" target="_blank" class="red1" title=""></a>
+				<a data-click="{&quot;act&quot;:&quot;cal_local&quot;}" href="http://map.baidu.com/?newmap=1&amp;ie=utf-8&amp;from=ibaidu&amp;s=s%26wd%3D东莞" target="_blank" class="blue">东莞</a>
 				</div>
 				</tianqi>		
-					
+					</div>
 			<!--notification menu end -->
 		<!-- //header-ends -->
-			
+				</div>
+				</div>
+					<div id="page">
+				<stronger>12312412513</stronger>
+			<!--body wrapper start-->
+			</div>
    </section>
   
 <script src="<%=path%>/js/jquery.nicescroll.js"></script>
 <script src="<%=path%>/js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
-   <script src="<%=path %>/js/bootstrap.min.js"></script>
+   <script src="<%=path%>/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -71,7 +71,8 @@ public class TranactionFilter implements Filter {
 			
 			HttpServletResponse resp = (HttpServletResponse) response;
 			HttpServletRequest req = (HttpServletRequest) request;
-			resp.sendRedirect(req.getContextPath() + "/error.jsp");
+			System.out.println("cuosskk");
+			//resp.sendRedirect(req.getContextPath() + "/error.jsp");
 			
 		} finally{
 			//7. ½â³ý°ó¶¨
