@@ -163,21 +163,44 @@ public class OrderService {
 
 
 	public void addOrder(List<Good> items, Order order, List<Shipment> ship) {
-		              int i=0;
-		              String orderId = "Test119";//改用查表增
+		           
+		          String oldTol = "00001";
+		           String oldId = ODao.getLastOrderId();
+		           
+		           System.out.println(ODao.getLastOrderId()==null);
+		           if(oldId != null){
+		        	    oldTol =oldId.substring(1);}
+		           long id = Long.parseLong(oldTol);
+		            id++;
+		            String newOrderId = "O"+String.valueOf(id);  
+		            
+		              String orderId = newOrderId;//改用查表增
 		              Date orderDate = new Date(System.currentTimeMillis());//获取当前日期
 		      		  order.setOrderId(orderId);
 		      		  order.setOrderDate(orderDate);
-                      for(Good d:items){
+                      
+                      for(int i=0; i<items.size(); i++){
+                    	  int rer = items.get(i).getReserve()-ship.get(i).getAmount();
                     	  ship.get(i).setOrderId(orderId);
-                    	  i++;
-                      }		
+                    	  items.get(i).setReserve(rer);//扣除相应库存
+                    	  GService.setGood(items.get(i));//更新相应的Good
+                      }
+                      
                       ODao.addOrder(order);
                       SService.addBatch(ship);
                       
                       
 	}
-	 
+	
+	
+	//删除订单
+		public void delOrder(String orderId){
+			ODao.delOrder(orderId);
+		}
+		
+		public void delOrdership(String orderId){
+			ODao.delOrdership(orderId);
+		}
 	
 
 }

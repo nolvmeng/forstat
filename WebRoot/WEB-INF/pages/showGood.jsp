@@ -342,7 +342,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <td><%=g.getGoodName() %></td>
 							  <td><%=g.getGoodPrice()+"元/公斤" %></td>
 							  <td><%=g.getReserve()+"公斤" %></td>
-							  <td><a href="GoodServlet?method=changejsp&id=<%=g.getGoodId() %>" class="btn btn-default">修改</a><a href="GoodServlet?method=delGood&id=<%=g.getGoodId()  %>" class="btn btn-default">删除</a></td>
+							  <td><a href="GoodServlet?method=changejsp&id=<%=g.getGoodId() %>" class="btn btn-default">修改</a><a href="GoodServlet?method=delGood&id=<%=g.getGoodId()  %>" class="btn btn-default" onClick="return confirm('是否删除？');">删除</a></td>
 							</tr><% i++;} %>
 							
 						  </tbody>

@@ -93,8 +93,7 @@ public interface GoodDAO {
     
     /**
      * 删除某货品
-     *@param String:oldId 旧的 goodId
-     *@param String:newId 新的 goodId
+     *@param String:goodId
      * @return 
      **/
     public abstract void delGood(String goodId);

@@ -48,4 +48,12 @@ public interface CustomerDAO {
      **/
     public abstract List<Customer> getCusList(int start, int pageSize);
     
+    /**
+     * 根据客户名获取客户Id
+     *@param String : 客户名
+     *@return String: 客户Id 
+     **/
+    public abstract String getId(String name);
+    
+    
 }

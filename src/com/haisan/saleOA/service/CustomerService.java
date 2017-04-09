@@ -1,5 +1,7 @@
 package com.haisan.saleOA.service;
 
+import java.util.List;
+
 import com.haisan.saleOA.dao.impl.CustomerDAOimpl;
 import com.haisan.saleOA.domain.Customer;
 import com.haisan.saleOA.web.Page;
@@ -25,6 +27,16 @@ public class CustomerService {
  		return cus;
           		//返回新建的用户，用于反馈是否创建
   	}
-	
+
+  //获取客户表
+  	public List<Customer> getCuCa(){
+  		List<Customer> cus=cusDAO.getCuCa();
+  		return cus;
+  	}
+
+  	//根据客户名获取客户Id
+  	public String getId(String name){
+  		return cusDAO.getId(name);
+  	}
 
 }

@@ -73,6 +73,27 @@ public class OrderDAOimpl extends BaseDAO<Order> implements OrderDAO{
 		return queryForList(sql, userId, start, pageSize);
 	}
 
+	@Override
+	public void delOrder(String orderId) {
+		String sql="DELETE FROM orders WHERE orderId=? ";
+		update(sql, orderId);
+		
+	}
+
+	@Override
+	public void delOrdership(String orderId) {
+		String sql="DELETE FROM shipment WHERE orderId=? ";
+		update(sql, orderId);
+		
+	}
+
+	@Override
+	public String getLastOrderId() {
+		String sql = "SELECT MAX(orderId) FROM orders ORDER BY orderId ASC ";
+		return getSingleVal(sql);
+		
+	}
+
 	
 	
 }

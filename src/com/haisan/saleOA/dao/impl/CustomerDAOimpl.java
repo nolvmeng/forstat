@@ -54,6 +54,13 @@ public class CustomerDAOimpl extends BaseDAO<Customer> implements CustomerDAO  {
 		return queryForList(sql,  start, pageSize);
 		
 	}
+
+	@Override
+	public String getId(String name) {
+		String sql = "SELECT customerId FROM customers where customerName = ?";
+		Customer id = query(sql,name);
+		return id.getCustomerId();
+	}
      
 	
 	

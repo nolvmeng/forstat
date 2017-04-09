@@ -191,13 +191,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    int i = 0;
 					    
 					   for(OrderItem o : orderItems){
-					         session.setAttribute(o.getOrder().getOrderId(), o);   %>
+					           session.setAttribute(o.getOrder().getOrderId(), o); %>
 							<tr class="<%=cla[i%2] %>">
 							  <th scope="row"  ><a href="OrderServlet?method=getAOrder&id=<%=o.getOrder().getOrderId() %>"><%=o.getOrder().getOrderId() %></a></th>
 							  <td><%=o.getCustomer().getCustomerName()%></td>
 							 <%--  <td><% if(total.get(g.getOrderId())!=null)%><%=total.get(g.getOrderId()) %></td> --%>
 								<td> <%=o.getTatalPriceS() %></td>
 							  <td><%=o.getOrder().getOrderDate() %></td>
+							  <td><a href="OrderServlet?method=delOrder&id=<%=o.getOrder().getOrderId() %>" class="btn btn-default" onClick="return confirm('是否删除？');">删除</a></td>
 							</tr><% i++;} %>
 							
 						  </tbody>

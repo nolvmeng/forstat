@@ -72,7 +72,26 @@ public interface OrderDAO {
     public abstract List<Order> getOrderList(int start, int pageSize, String userId);
     
     
+    /**
+     * 删除某订单
+     *@param String:goodId
+     * @return 
+     **/
+    public abstract void delOrder(String orderId);
     
+    
+    /**
+     * 删除某订单
+     *@param String:goodId
+     * @return 
+     **/
+    public abstract void delOrdership(String orderId);
+    
+    /**
+     * 获取最后一条订单号
+     *@return String :orderId
+     **/
+    public abstract String getLastOrderId();
     
     
      

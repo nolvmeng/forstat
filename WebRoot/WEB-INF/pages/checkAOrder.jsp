@@ -6,7 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include  page="/commons/copyright.jsp"/>
 <%@ page import=" com.haisan.saleOA.web.Page" %>
 <%@ page import=" com.haisan.saleOA.domain.Good" %>
-<%@ page import=" com.haisan.saleOA.domain.GoodItem" %>
+<%@ page import=" com.haisan.saleOA.domain.Customer" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -177,6 +177,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</script>
 										<!-- //search-scripts -->
 										<form action="OrderServlet?method=toCheckSu" method="post">
+										  <div class="col-sm-8">
+										<select  class="classSelect" name="custorName">
+										
+										    <option selected>请选择客户</option>
+										    <%
+					                              List<Customer> cus =(List<Customer>)request.getAttribute("cus");
+					                               
+					                             for(Customer b : cus ){
+					    %>
+											<option value="<%=b.getCustomerName() %>"><%=b.getCustomerName() %></option>
+											<% } %>
+										</select>
+										
+									</div>
+										
 				 <div class="bs-example4" data-example-id="contextual-table">
 						<table class="table">
 						  <thead>

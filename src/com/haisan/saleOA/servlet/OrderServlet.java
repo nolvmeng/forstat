@@ -14,12 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.haisan.saleOA.domain.Customer;
 import com.haisan.saleOA.domain.Good;
 import com.haisan.saleOA.domain.GoodItem;
 import com.haisan.saleOA.domain.Order;
 import com.haisan.saleOA.domain.OrderItem;
 import com.haisan.saleOA.domain.Shipment;
 import com.haisan.saleOA.domain.User;
+import com.haisan.saleOA.service.CustomerService;
 import com.haisan.saleOA.service.GoodService;
 import com.haisan.saleOA.service.OrderService;
 import com.haisan.saleOA.service.ShipmentService;
@@ -32,6 +34,7 @@ public class OrderServlet extends HttpServlet {
 	UserService UService = new UserService();
 	GoodService GService = new GoodService();
 	ShipmentService SService = new ShipmentService();
+	CustomerService customerService = new CustomerService();
 	  List<Good> gooditem= new ArrayList<Good>();
       List<Shipment> ship = new ArrayList<Shipment>();	
       
@@ -49,6 +52,9 @@ public class OrderServlet extends HttpServlet {
  
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setHeader("content-type", "text/html;charset=UTF-8");  
+		response.setCharacterEncoding("UTF-8");  
+		request.setCharacterEncoding("UTF-8");  
 		String methodName = request.getParameter("method");
 		if (methodName !=null) {
 		try {
@@ -89,6 +95,8 @@ public class OrderServlet extends HttpServlet {
 	//进入核对订单
 	public  void toCheck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		 gooditem =(List<Good>) request.getAttribute("good");
+		 List<Customer> cus=customerService.getCuCa();
+			request.setAttribute("cus", cus);
 	           if(request.getSession().getAttribute("good")!= null) {
 	        	   System.out.println("xiyan");
 	              // request.setAttribute("goods", gooditem);
@@ -106,11 +114,17 @@ public class OrderServlet extends HttpServlet {
 		User user = (User)request.getSession().getAttribute("userw");
 		List<Shipment> ship = new ArrayList<Shipment>();
 		String userId =" ";
+		 String customerId = "C1234567";//改为参数获取
+		 String custorName="";
 	    if(user != null)  
 		    userId = user.getUserId();
 		if(items != null){
+			     if(request.getParameter("custorName")!=null){
+			    	 custorName =request.getParameter("custorName");//"C1234567";//改为参数获取
+			    	 System.out.println(custorName);
+			    	 customerId = customerService.getId(custorName);
+			     }    
 			 
-			 String customerId ="C1234567";//改为参数获取
 			 Order order = new Order();
 			 order.setCustomerId(customerId);
 			 order.setUserId(userId);
@@ -120,25 +134,23 @@ public class OrderServlet extends HttpServlet {
 				 int amount = 0;
 				 if(request.getParameter(i+"")!=null){
 					 amount = Integer.parseInt(request.getParameter(i+""));
+					 }
 					 Shipment shipment =new Shipment();
 				 shipment.setGoodId(good.getGoodId());
 				 shipment.setPrive(good.getGoodPrice());
 				 shipment.setAmount(amount);//设置货品数量
 				 ship.add(shipment);
 				// System.out.println(items.get(i).getAmount());
-				 }
+				
 			 }
 			 //System.out.println(items.size());
 			 
 			OService.addOrder(items, order, ship); 
 		}
 		
-		 
-		
-		
-		
-		
-		request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);
+		  
+		getOrder(request, response);
+		/*request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);*/
 	}
 	
 	public void addGood(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -169,7 +181,7 @@ public class OrderServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			request.setAttribute("id", id);
 			
-			if(session.getAttribute(id) != null)
+			if(session.getAttribute(id) == null)
 				System.out.println(id);
 			System.out.println("ss");
 			
@@ -177,6 +189,18 @@ public class OrderServlet extends HttpServlet {
 			
 		}
 		
+	//删除订单
+		public void delOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			//HttpSession session = request.getSession();
+			String id = request.getParameter("id");
+			//request.setAttribute("id", id);
+			
+			if(id != null)
+				System.out.println(id);
+			OService.delOrder(id);
+			OService.delOrdership(id);
+			getOrder(request, response);
+		}
 	
 
 	public void init() throws ServletException {

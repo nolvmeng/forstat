@@ -1302,6 +1302,9 @@ i.fa.fa-tasks{
 	background: none;
 	
 }
+.classSelect{
+	width:200px;
+}
 .sb-search {
 	position: absolute;
 	left: 1200px;

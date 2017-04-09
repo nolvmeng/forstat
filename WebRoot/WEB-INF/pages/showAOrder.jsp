@@ -196,9 +196,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    String[] cla = {"success", "info"};
 					    int i = 0;
 					         String id = (String)request.getAttribute("id");
-					         OrderItem o = (OrderItem)session.getAttribute(id); 
-					         List<Good> goodList = o.getGoodList(); 
-					         List<Shipment> ship = o.getShipmentList();
+					         OrderItem o = (OrderItem)session.getAttribute(id);
+					         List<Good> goodList = new ArrayList<Good>();
+					         List<Shipment> ship = new ArrayList<Shipment>();
+					         if(o != null) {
+					             goodList = o.getGoodList(); 
+					          ship = o.getShipmentList();
+					          }
 					          %>
 						
 							  
