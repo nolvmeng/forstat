@@ -59,6 +59,8 @@ public class TranactionFilter implements Filter {
 			
 			//5. 提交事务
 			connection.commit();
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			
@@ -72,6 +74,7 @@ public class TranactionFilter implements Filter {
 			HttpServletResponse resp = (HttpServletResponse) response;
 			HttpServletRequest req = (HttpServletRequest) request;
 			System.out.println("cuosskk");
+			
 			//resp.sendRedirect(req.getContextPath() + "/error.jsp");
 			
 		} finally{

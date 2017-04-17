@@ -147,26 +147,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				</div>
 					<div id="page-wrapper">
-				 <div class="classbuton">
-					<input class="btn btn-default " type="button" value="全部货品" onClick="n_allfood()"">
-					<input class="btn btn-default " type="button" value="蔬菜类" onClick="n_getVegetables()">
-					<input class="btn btn-default " type="button" value="肉类" onClick="n_getMeat()">
-					<input class="btn btn-default " type="button" value="主食类" onClick="n_getAtaplefood()">
-					<input class="btn btn-default " type="button" value="其他" onClick="n_getOther()"></div>
+				 
 					
-				<div class="search-box">
 				
-										<div id="sb-search" class="sb-search">
-										
-											<form name="form1" action="<%=path + "/servlet/GoodServlet?method=getAGood" %>">
-											
-												<input class="sb-search-input" placeholder="这里可以搜索" type="search" id="search" name="search">
-												<input class="sb-search-submit" type="submit" value="搜索" ">
-											
-												<span class="sb-icon-search"> </span>
-											</form>
-										</div>
-									</div>
 										<!-- search-scripts -->
 										
 										<script src="<%=path%>/js/nextpage.js"></script>
@@ -200,7 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <th>货品名称</th>
 							  <th>单价</th>
 							  <th>库存</th>
-							  <th>金额</th>
+							  <th>需求数量</th>
 							</tr>
 						  </thead>
 						  <tbody>
@@ -216,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <td><%=g.getGoodName() %></td>
 							  <td><%=g.getGoodPrice()+"元" %></td>
 							  <td><%=g.getReserve()+"公斤"%></td>
-							  <td>数量<input name="<%=i%>" type="text" width="20pd" size="4dp"/></td>
+							  <td>数量 <input name="<%=i%>" type="text" width="20pd" size="4dp"/></td>
 							</tr><% i++;} %>
 							
 						  </tbody>

@@ -5,10 +5,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <jsp:include  page="/commons/copyright.jsp"/>
 <%@ page import=" com.haisan.saleOA.web.Page" %>
-<%@ page import=" com.haisan.saleOA.domain.Good" %>
-<%@ page import=" com.haisan.saleOA.domain.OrderItem" %>
-<%@ page import=" com.haisan.saleOA.domain.GoodItem" %>
 <%@ page import=" com.haisan.saleOA.domain.Order" %>
+<%@ page import=" com.haisan.saleOA.domain.OrderItem" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -154,10 +152,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 										<div id="sb-search" class="sb-search">
 										
-											<form name="form1" action="<%=path + "/servlet/GoodServlet?method=getAGood" %>">
+											<form name="form1" action="OrderServlet?method=getsomeOrder" %>">
 											
 												<input class="sb-search-input" placeholder="这里可以搜索" type="search" id="search" name="search">
-												<input class="sb-search-submit" type="submit" value="搜索" >
+												<input class="sb-search-submit" type="submit" value="搜索" ">
 											
 												<span class="sb-icon-search"> </span>
 											</form>
@@ -177,54 +175,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						  <thead>
 							<tr>
 							  <th>订单编号</th>
-							  <th>操作员编号</th>
-							  <th>客户ID</th>
-							  <th>客户姓名</th>
-							  <th>客户地址</th>
-							  <th>客户电话</th>
+							  <th>客户名称</th>
 							  <th>订单金额</th>
-						
+							  <th>订单日期</th>
 							</tr>
 						  </thead>
 						  <tbody>
 						  
-					  <%//Page<OrderItem> pageOrder = (Page)request.getAttribute("pageOrder");
-					  //  Map<String, Double> total =(Map)request.getAttribute("total");
-					  //List<OrderItem> orderItems = pageOrder.getList();
-					    
-					   // List<Order> orders = o.getOrder()%>
-					      <% 
+					 <% 
+					    List<Order> some = (List<Order>)request.getAttribute("some");
+					 
+					     
 					    String[] cla = {"success", "info"};
 					    int i = 0;
-					         String id = (String)request.getAttribute("id");
-					         OrderItem o=(OrderItem)session.getAttribute(id); 
-					         List<GoodItem> goodList = o.getGoodList();  %>
+					    
+					   for(Order o : some){
+					           //session.setAttribute(o.o.getOrderId(), o); %>
 							<tr class="<%=cla[i%2] %>">
-							  <th scope="row"  ><%=o.getOrder().getOrderId() %></a></th>
+							  <th scope="row"  ><a href="OrderServlet?method=getAOrder&id=<%=o.getOrderId() %>"><%=o.getOrderId() %></a></th>
+							  <td><%=o.getCustomerId()%></td>
+							 <%--  <td><% if(total.get(g.getOrderId())!=null)%><%=total.get(g.getOrderId()) %></td> --%>
+								<td> <%=o.getOrderDate() %></td>
 							  <td><%=o.getUserId() %></td>
-							  <td><%=o.getCustomer().getCustomerId()%></td>
-							  <td><%=o.getCustomer().getCustomerName() %></td>
-							  <td><%=o.getCustomer().getAddress() %></td>
-							  <td><%=o.getCustomer().getPhoneNum() %></td>
-							  <td> <%=o.getTatalPriceS() %></td>
-							  
-							  <% for(GoodItem d : goodList){
-					           %>
-							 class="<%=cla[i%2] %>">
-							  <th scope="row"  ><%=d.getGood().getGoodId()%></th>
-							  <td><%=d.getGood().getGoodName() %></td>
-							  <td><%=d.getGood().getGoodPrice() %></td>
-							 
-							  <td><%=d.getGood().getProductDate() %></td>
-							  <td><%=d.getAmount() %></td>
-							 <%--  <td><% if(total.get(g.getOrderId())!=null)%><%=total.get(g.getOrderId()) %></td> --%>
-							 <td> <%=d.getItemMoney()%></td>
-							  
+							  <td><a href="OrderServlet?method=delOrder&id=<%=o.getDelivery() %>" class="btn btn-default" onClick="return confirm('是否删除？');">删除</a></td>
 							</tr><% i++;} %>
-							 <%--  <td><% if(total.get(g.getOrderId())!=null)%><%=total.get(g.getOrderId()) %></td> --%>
-							 
-							 
-							
 							
 						  </tbody>
 						</table>
@@ -271,7 +245,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 									<div class="clearfix"> </div>
 								</div>
-								
+								<div class="float-right">
+									       	<div class="btn-group">
+												<a href="OrderServlet?method=getOrder&pageNO" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
+												<a href="OrderServlet?method=getOrder&pageNO" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
+											</div>
+										  
+											<span class="text-muted m-r-sm">当前第页 ，共页 </span>
+											<div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
+												<div class="btn-group">
+													<a class="btn btn-default dropdown-toggle"  >
+													<i class="fa fa-folder">首页</i></a>
+													
+												</div>
+												<div class="btn-group">
+													<a class="btn btn-default dropdown-toggle" >
+													<i class="fa fa-tags">尾页</i> </a>
+												</div>
+											</div>
+										
+										
+									
+								</div>
 							   </div>
 				 
 				 

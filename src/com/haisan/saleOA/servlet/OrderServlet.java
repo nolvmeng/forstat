@@ -1,4 +1,4 @@
-package com.haisan.saleOA.servlet;
+ï»¿package com.haisan.saleOA.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -75,15 +75,47 @@ public class OrderServlet extends HttpServlet {
 		Page<OrderItem> pageOrder = new Page<OrderItem>(1);
 		int pageNO = 1; int pageSize = 10;
 		User user = (User) request.getSession().getAttribute("userw");
-		if(user == null)  response.sendRedirect("/saleOA/index.jsp");//Î´µÇÂ¼×´Ì¬ÏÂ£¬·µ»ØµÇÂ¼Ò³
+		if(user == null)  response.sendRedirect("/saleOA/index.jsp");//æœªç™»å½•çŠ¶æ€ä¸‹ï¼Œè¿”å›ç™»å½•é¡µ
 		System.out.println(user.getUsername());
-		pageOrder = OService.getPageOrder(pageNO, pageSize, user.getUserId());
-		if(pageOrder.getList() != null) System.out.println("ÒÑ½øÈëOr"+user.getUserId());
+		pageOrder = OService.getPageOrder(pageNO, pageSize, user.getUserId(),null);
+		if(pageOrder.getList() != null) System.out.println("å·²è¿›å…¥Or"+user.getUserId());
 	  	request.setAttribute("pageOrder", pageOrder);
 	  	
 	  	
 	  	request.getRequestDispatcher("/WEB-INF/pages/showOrder.jsp").forward(request, response);
 	  	
+	}
+	
+	//æœç´¢è®¢å•
+	public void getsomeOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		System.out.println("è¿›å…¥äº†å¤„ç†è·å–");
+		Page<OrderItem> pageOrder = new Page<OrderItem>(1);
+		int pageNO = 1; int pageSize = 10;
+		String some = "";	
+		if(request.getParameter("search")!=null){
+			some = request.getParameter("search");
+			System.out.println(some+"è¿›å…¥äº†å¤„ç†æœç´¢");
+		}
+		if(request.getParameter("searcht")!=null ){
+		    some = new String(request.getParameter("searcht").getBytes("iso-8859-1"),"utf-8");
+		    System.out.println(some+"è¿›å…¥äº†å¤„ç†fanye");
+		}
+		/*if(!some.equals("")){*/
+			System.out.println(some);
+			  /*some = "å°æ";*/
+		User user = (User) request.getSession().getAttribute("userw");
+		if(user == null)  response.sendRedirect("/saleOA/index.jsp");//æœªç™»å½•çŠ¶æ€ä¸‹ï¼Œè¿”å›ç™»å½•é¡µ
+		System.out.println(user.getUsername());
+		pageOrder = OService.getPageOrder(pageNO, pageSize, user.getUserId(),some);
+		if(pageOrder.getList() != null) System.out.println("å·²è¿›å…¥Or"+user.getUserId());
+	  	request.setAttribute("pageOrder", pageOrder);
+	  	request.setAttribute("mo","getsomeOrder");
+	  	request.setAttribute("some", some);
+	  	
+	  	request.getRequestDispatcher("/WEB-INF/pages/showOrder.jsp").forward(request, response);
+	  	/*} else{
+	  		getOrder(request, response);
+	  	}*/
 	}
 	
 	public void newOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -92,7 +124,7 @@ public class OrderServlet extends HttpServlet {
 		
 	}
 	
-	//½øÈëºË¶Ô¶©µ¥
+	//è¿›å…¥æ ¸å¯¹è®¢å•
 	public  void toCheck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		 gooditem =(List<Good>) request.getAttribute("good");
 		 List<Customer> cus=customerService.getCuCa();
@@ -102,25 +134,25 @@ public class OrderServlet extends HttpServlet {
 	              // request.setAttribute("goods", gooditem);
 	               }
 	           request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);
-	           gooditem = new ArrayList<Good>();//³õÊ¼»¯ÒÔ´ïµ½Çå³ıĞ§¹û
+	           gooditem = new ArrayList<Good>();//åˆå§‹åŒ–ä»¥è¾¾åˆ°æ¸…é™¤æ•ˆæœ
 	           request.setAttribute("goods", gooditem);
 	}
 	          // gooditem.clear();
 	
-	//È·ÈÏÊıÁ¿£¬Íê³ÉĞÂ¶©µ¥
+	//ç¡®è®¤æ•°é‡ï¼Œå®Œæˆæ–°è®¢å•
 	public void toCheckSu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		List<Good> items = (List<Good>) request.getSession().getAttribute("good");
 		User user = (User)request.getSession().getAttribute("userw");
 		List<Shipment> ship = new ArrayList<Shipment>();
 		String userId =" ";
-		 String customerId = "C1234567";//¸ÄÎª²ÎÊı»ñÈ¡
+		 String customerId = " ";//æ”¹ä¸ºå‚æ•°è·å–
 		 String custorName="";
 	    if(user != null)  
 		    userId = user.getUserId();
 		if(items != null){
 			     if(request.getParameter("custorName")!=null){
-			    	 custorName =request.getParameter("custorName");//"C1234567";//¸ÄÎª²ÎÊı»ñÈ¡
+			    	 custorName =request.getParameter("custorName");//"C1234567";//æ”¹ä¸ºå‚æ•°è·å–
 			    	 System.out.println(custorName);
 			    	 customerId = customerService.getId(custorName);
 			     }    
@@ -138,7 +170,7 @@ public class OrderServlet extends HttpServlet {
 					 Shipment shipment =new Shipment();
 				 shipment.setGoodId(good.getGoodId());
 				 shipment.setPrive(good.getGoodPrice());
-				 shipment.setAmount(amount);//ÉèÖÃ»õÆ·ÊıÁ¿
+				 shipment.setAmount(amount);//è®¾ç½®è´§å“æ•°é‡
 				 ship.add(shipment);
 				// System.out.println(items.get(i).getAmount());
 				
@@ -159,7 +191,7 @@ public class OrderServlet extends HttpServlet {
 		
 		if(request.getParameter("Id") != null){
 		  Good good = GService.getGood(id);
-		  System.out.println("xinidÎª·Ç¿Õ"+id);
+		  System.out.println("xinidä¸ºéç©º"+id);
 		  gooditem.add(good);
 		}
 	/*	HttpSession ss = request.getSession();
@@ -174,7 +206,7 @@ public class OrderServlet extends HttpServlet {
 	}
 	 
 	
-	//´«²ÎÏÔÊ¾¶©µ¥ÏêÏ¸
+	//ä¼ å‚æ˜¾ç¤ºè®¢å•è¯¦ç»†
 		public void getAOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			
 			HttpSession session = request.getSession();
@@ -189,7 +221,7 @@ public class OrderServlet extends HttpServlet {
 			
 		}
 		
-	//É¾³ı¶©µ¥
+	//åˆ é™¤è®¢å•
 		public void delOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			//HttpSession session = request.getSession();
 			String id = request.getParameter("id");

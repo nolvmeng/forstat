@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -152,10 +152,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 										<div id="sb-search" class="sb-search">
 										
-											<form name="form1" action="<%=path + "/servlet/GoodServlet?method=getAGood" %>">
+											<form name="form1" action="OrderServlet?method=getsomeOrder" method="post">
 											
-												<input class="sb-search-input" placeholder="这里可以搜索" type="search" id="search" name="search">
-												<input class="sb-search-submit" type="submit" value="搜索" ">
+												<input class="sb-search-input" placeholder="这里可以搜索" type="search"  name="search">
+												<input class="sb-search-submit" type="submit" value="搜索" >
 											
 												<span class="sb-icon-search"> </span>
 											</form>
@@ -248,8 +248,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="float-right">
 									       	<div class="btn-group">
-												<a href="OrderServlet?method=getOrder&pageNO=<%=pageOrder.getPrevPage()%>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-												<a href="OrderServlet?method=getOrder&pageNO=<%=pageOrder.getNextPage()%>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
+									       	<%String moth ="getOrder";
+									       	   String key = "";//String keys ="";
+									       	if(request.getAttribute("mo") != null && request.getAttribute("some") != null){
+									       	moth=(String)request.getAttribute("mo");
+									       	key=(String)request.getAttribute("some");
+									       //	 keys =new String(key.getBytes("iso-8859-1"), "utf-8");
+									     
+									       	}
+									       	 %>
+												<a href="OrderServlet?method=<%=moth+"&searcht="+key+"&fan=is" %>&pageNO=<%=pageOrder.getPrevPage()%>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
+												<a href="OrderServlet?method=<%=moth+"&searcht="+key+"&fan=is" %>&pageNO=<%=pageOrder.getNextPage()%>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
 											</div>
 										  
 											<span class="text-muted m-r-sm">当前第<%=pageOrder.getPageNO()%>页 ，共<%=pageOrder.getTotalPageNumber()%>页 </span>

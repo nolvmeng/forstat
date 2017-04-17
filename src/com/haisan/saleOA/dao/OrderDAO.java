@@ -94,6 +94,16 @@ public interface OrderDAO {
     public abstract String getLastOrderId();
     
     
+    /**
+	 *根据order关键字 获取order对象
+	 * @param orderkey
+	 * @return
+	 **/
+	public abstract List<Order> getsomeOrder(int start, int pageSize,String orderkey);
+
+	List<Order> getsomeOrder(int start, int pageSize, String userId,
+			String orderkey);
+    
      
     
 	

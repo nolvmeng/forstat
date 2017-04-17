@@ -94,6 +94,25 @@ public class OrderDAOimpl extends BaseDAO<Order> implements OrderDAO{
 		
 	}
 
+	@Override
+	public List<Order> getsomeOrder(int start, int pageSize, String userId,String orderkey) {
+		String sql = "SELECT orderId, orders.customerId, orderDate, userId, delivery FROM orders,customers"
+				+ " WHERE userId=? and orders.customerId=customers.customerId AND concat(orderId,customerName,orderDate,userId,delivery)  LIKE ?"
+				+ " ORDER BY orderId ASC LIMIT ?,?";
+		String sql2="%"+orderkey+"%";
+        return queryForList(sql,userId,sql2,start,pageSize);
+	}
+
+	@Override
+	public List<Order> getsomeOrder(int start, int pageSize, String orderkey) {
+		String sql = "SELECT orderId, orders.customerId, orderDate, userId, delivery FROM orders,customers"
+				+ " WHERE orders.customerId=customers.customerId AND concat(orderId,customerName,orderDate,userId,delivery)  LIKE ?"
+				+ " ORDER BY orderId ASC LIMIT ?,?";
+		String sql2="%"+orderkey+"%";
+        return queryForList(sql, sql2,start,pageSize);
+		
+	}
+
 	
 	
 }

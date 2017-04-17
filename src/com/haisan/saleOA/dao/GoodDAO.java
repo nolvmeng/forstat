@@ -98,5 +98,7 @@ public interface GoodDAO {
      **/
     public abstract void delGood(String goodId);
     
+    
+   
 
 }

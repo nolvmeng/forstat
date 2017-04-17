@@ -52,14 +52,14 @@ public class OrderService {
 		
 	}*/
 	
-	//获取订单页
-	public Page<OrderItem> getPageOrder(int pageNO, int pageSize, String userId){
+	//获取订单页//搜索订单
+	public Page<OrderItem> getPageOrder(int pageNO, int pageSize, String userId,String orderkey){//orderkey为null就是不查询
 		User user = UDao.getUser(userId);
 		String position = user.getPosition();
 		Page<OrderItem> pageOItem = new Page<OrderItem>(1);
 		pageOItem.setPageNO(pageNO);
 		pageOItem.setPageSize(pageSize);
-	
+	if(orderkey==null){
 		if(position.equals("simple")){
 			pageOItem.setTotalItemNumber(ODao.getTotalNum(userId));
 			int start = (pageOItem.getPageNO()-1)*pageOItem.getPageSize();
@@ -74,7 +74,22 @@ public class OrderService {
 			pageOItem.setList(getOrederItem(listOrder));
 			
 		}
-		 
+	} else{
+		if(position.equals("simple")){
+			pageOItem.setTotalItemNumber(ODao.getTotalNum(userId));
+			int start = (pageOItem.getPageNO()-1)*pageOItem.getPageSize();
+			 List<Order> listOrder = ODao.getsomeOrder(start, pageSize, userId, orderkey);
+			pageOItem.setList(getOrederItem(listOrder));
+			
+			
+		} else {
+			pageOItem.setTotalItemNumber(ODao.getTotalNum());
+			int start = (pageOItem.getPageNO()-1)*pageOItem.getPageSize();
+			 List<Order> listOrder = ODao.getsomeOrder(start, pageSize, orderkey);
+			pageOItem.setList(getOrederItem(listOrder));
+			
+		}
+	}
 		return pageOItem;
 		
 		
@@ -159,7 +174,8 @@ public class OrderService {
 		 
 	 }
 
-
+     
+	
 
 
 	public void addOrder(List<Good> items, Order order, List<Shipment> ship) {

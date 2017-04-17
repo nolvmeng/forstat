@@ -211,13 +211,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <td><%=g.getGoodName() %></td>
 							  <td><%=g.getGoodPrice()+"元/公斤" %></td>
 							  <td><%=g.getReserve()+"公斤" %></td>
-							  <td>数量<input type="text" width="20pd" size="4dp"/></td>
+							  <td></td>
 							</tr><% i++;} %>
 							
 						  </tbody>
 						</table>
 						<div class="btn-group">
-							<a href="OrderServlet?method=toCheck" class="btn-success btn"><i class="fa fa-angle-left"></i></a>
+							<a href="OrderServlet?method=toCheck" class="btn btn-default">提交</a>
 											</div>
 										  
 					   </div>
