@@ -15,19 +15,24 @@ function jumpTo(maxPage){
 	window.location.href="/servlet/GoodServlet?search="+search;
 }*/
 function allfood(){
+	var t =  document.getElementById("a").value;
 	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=all";
 }
 function getVegetables(){
-	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=vegetable";
+	var t =  document.getElementById("a").value;
+	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=vegetable&searcht="+t;
 }
 function getMeat(){
-	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=meat";
+	var t =  document.getElementById("a").value;
+	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=meat&searcht="+t;
 }
 function getAtaplefood(){
-	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=main";
+	var t =  document.getElementById("a").value;
+	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=main&searcht="+t;
 }
 function getOther(){
-	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=other";
+	 var t =  document.getElementById("a").value;
+	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=other&searcht="+t;
 }
 
 
@@ -38,6 +43,7 @@ function n_getVegetables(){
 	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=vegetable&new=is";
 }
 function n_getMeat(){
+	
 	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=meat&new=is";
 }
 function n_getAtaplefood(){

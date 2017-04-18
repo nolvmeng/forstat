@@ -56,7 +56,7 @@ public class OrderService {
 	public Page<OrderItem> getPageOrder(int pageNO, int pageSize, String userId,String orderkey){//orderkey为null就是不查询
 		User user = UDao.getUser(userId);
 		String position = user.getPosition();
-		Page<OrderItem> pageOItem = new Page<OrderItem>(1);
+		Page<OrderItem> pageOItem = new Page<OrderItem>(2);
 		pageOItem.setPageNO(pageNO);
 		pageOItem.setPageSize(pageSize);
 	if(orderkey==null){
@@ -65,7 +65,7 @@ public class OrderService {
 			int start = (pageOItem.getPageNO()-1)*pageOItem.getPageSize();
 			 List<Order> listOrder = ODao.getOrderList(start,  pageSize,  userId);
 			pageOItem.setList(getOrederItem(listOrder));
-			
+			System.out.println("Page+"+pageOItem.getPageNO());
 			
 		} else {
 			pageOItem.setTotalItemNumber(ODao.getTotalNum());
@@ -76,14 +76,14 @@ public class OrderService {
 		}
 	} else{
 		if(position.equals("simple")){
-			pageOItem.setTotalItemNumber(ODao.getTotalNum(userId));
+			pageOItem.setTotalItemNumber(ODao.getsearchTotalId(userId, orderkey));
 			int start = (pageOItem.getPageNO()-1)*pageOItem.getPageSize();
 			 List<Order> listOrder = ODao.getsomeOrder(start, pageSize, userId, orderkey);
 			pageOItem.setList(getOrederItem(listOrder));
 			
 			
 		} else {
-			pageOItem.setTotalItemNumber(ODao.getTotalNum());
+			pageOItem.setTotalItemNumber(ODao.getsearchTotal(orderkey));
 			int start = (pageOItem.getPageNO()-1)*pageOItem.getPageSize();
 			 List<Order> listOrder = ODao.getsomeOrder(start, pageSize, orderkey);
 			pageOItem.setList(getOrederItem(listOrder));

@@ -97,7 +97,7 @@ public class OrderDAOimpl extends BaseDAO<Order> implements OrderDAO{
 	@Override
 	public List<Order> getsomeOrder(int start, int pageSize, String userId,String orderkey) {
 		String sql = "SELECT orderId, orders.customerId, orderDate, userId, delivery FROM orders,customers"
-				+ " WHERE userId=? and orders.customerId=customers.customerId AND concat(orderId,customerName,orderDate,userId,delivery)  LIKE ?"
+				+ " WHERE userId=? and orders.customerId=customers.customerId AND concat(orderId,customerName,orderDate,userId)  LIKE ?"
 				+ " ORDER BY orderId ASC LIMIT ?,?";
 		String sql2="%"+orderkey+"%";
         return queryForList(sql,userId,sql2,start,pageSize);
@@ -106,13 +106,31 @@ public class OrderDAOimpl extends BaseDAO<Order> implements OrderDAO{
 	@Override
 	public List<Order> getsomeOrder(int start, int pageSize, String orderkey) {
 		String sql = "SELECT orderId, orders.customerId, orderDate, userId, delivery FROM orders,customers"
-				+ " WHERE orders.customerId=customers.customerId AND concat(orderId,customerName,orderDate,userId,delivery)  LIKE ?"
+				+ " WHERE orders.customerId=customers.customerId AND concat(orderId,customerName,orderDate,userId)  LIKE ?"
 				+ " ORDER BY orderId ASC LIMIT ?,?";
 		String sql2="%"+orderkey+"%";
         return queryForList(sql, sql2,start,pageSize);
 		
 	}
 
-	
+	@Override
+	public int getsearchTotal(String orderkey) {
+		String sql = "SELECT count(orderId) FROM orders,customers"
+				+ " WHERE orders.customerId=customers.customerId AND concat(orderId,customerName,orderDate,userId)  LIKE ?";
+		String sql2="%"+orderkey+"%";
+		long num = getSingleVal(sql, sql2);
+		int n = (int)num;
+		return n;
+	}
+
+	@Override
+	public int getsearchTotalId(String userId,String orderkey) {
+		String sql = "SELECT count(orderId) FROM orders,customers"
+				+ " WHERE userId=? and orders.customerId=customers.customerId AND concat(orderId,customerName,orderDate,userId)  LIKE ?";
+		String sql2="%"+orderkey+"%";
+		long num = getSingleVal(sql,userId, sql2);
+		int n = (int)num;
+        return n;
+	}
 	
 }

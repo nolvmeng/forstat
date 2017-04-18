@@ -296,9 +296,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 										<div id="sb-search" class="sb-search">
 										
-											<form name="form1" action="<%=path + "/servlet/GoodServlet?method=getAGood" %>">
+											<form name="form1" action="GoodServlet?method=AllGoods" method="post">
 											
-												<input class="sb-search-input" placeholder="这里可以搜索" type="search" id="search" name="search">
+												<input class="sb-search-input" placeholder="这里可以搜索" type="search" id="box" name="search">
 												<input class="sb-search-submit" type="submit" value="搜索" ">
 											
 												<span class="sb-icon-search"> </span>
@@ -392,8 +392,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="float-right">
 									       	<div class="btn-group">
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getPrevPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-												<a href="GoodServlet?method=AllGoods&pageNO=<%=pageGood.getNextPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
+									       	<%String moth ="AllGoods";
+									       	   String key = "";
+									       	if(request.getAttribute("mo") != null && request.getAttribute("some") != null){
+									       	moth=(String)request.getAttribute("mo");
+									       	key=(String)request.getAttribute("some");
+									       
+									     
+									       	}
+									       	 %>
+									       	 <input type="text" id="a" style="visibility:hidden" value="<%=key %>"/>
+												<a href="GoodServlet?method=<%=moth+"&searcht="+key+"&fan=is" %>&pageNO=<%=pageGood.getPrevPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
+												<a href="GoodServlet?method=<%=moth+"&searcht="+key+"&fan=is" %>&pageNO=<%=pageGood.getNextPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
 											</div>
 										  
 											<span class="text-muted m-r-sm">当前第<%=pageGood.getPageNO()%>页 ，共<%=pageGood.getTotalPageNumber()%>页 </span>

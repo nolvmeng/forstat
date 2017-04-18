@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.haisan.saleOA.domain.Good;
+import com.haisan.saleOA.domain.Order;
 import com.haisan.saleOA.web.Page;
 
 
@@ -98,7 +99,29 @@ public interface GoodDAO {
      **/
     public abstract void delGood(String goodId);
     
-    
-   
+    public abstract List<Good> getsomeGood(int start, int pageSize,String goodkey);
 
+    /**
+     * 获取该搜索货品数目
+     *@param String: goodkey
+     *@return int: 数目
+     **/
+   public abstract int getsearchTotal(String goodkey);
+   
+   /**
+    * 获取该搜索种类货品数目
+    *@param String: category
+    *@return int: 数目
+    **/
+  public abstract int getsearchcaTotal(String category,String goodkey);
+   
+   /**
+    * 按搜索分表获取该类货品列表
+    *@param int: 开始
+    *@param int: 每页条目数
+    *@param String: category种类
+    *@return page<Good>
+    **/
+  
+  public abstract List<Good> getsomesearchGood(int start, int pageSize, String category,String goodkey);
 }

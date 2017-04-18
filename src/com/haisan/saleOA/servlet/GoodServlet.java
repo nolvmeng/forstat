@@ -64,6 +64,7 @@ public class GoodServlet extends HttpServlet {
 		request.setAttribute("goods", goods);*/
 		int pageNO = 1;  int pageSize = 10;
 		String cate = "all";
+		String some="";
 		String NO = request.getParameter("pageNO") ;
 		String category = request.getParameter("category");
 		request.setAttribute("att_cate",category);
@@ -76,10 +77,19 @@ public class GoodServlet extends HttpServlet {
 		if(category != null) {
 			cate = category;//获取传入种类参数值
 		   } 
+		if(request.getParameter("search")!=null){
+			some = request.getParameter("search");
+			System.out.println(some+"进入了处理搜索");
+		}
+		if(request.getParameter("searcht")!=null ){
+		    some = new String(request.getParameter("searcht").getBytes("iso-8859-1"),"utf-8");
+		    System.out.println(some+"进入了处理fanye");
+		}
 		System.out.println(pageNO+"p");
-		  pageGood = goodService.getPageGood(pageNO, pageSize, cate);
+		  pageGood = goodService.getPageGood(pageNO, pageSize, cate, some);
 		  request.setAttribute("pageGood", pageGood);
-		  
+		  request.setAttribute("mo","AllGoods");
+		  request.setAttribute("some", some);
 		  
 		  if(request.getParameter("new")==null)
 		     request.getRequestDispatcher("/WEB-INF/pages/showGood.jsp").forward(request, response);
@@ -89,16 +99,6 @@ public class GoodServlet extends HttpServlet {
 		  }
 		  /*else
 			  request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);*/
-	}
-	
-	//获取某货品
-	public void getAgood(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("成功");
-		String goodid=request.getParameter("search");
-		Good good=goodService.getGood(goodid);
-		if(good!=null){
-			
-		}
 	}
 	
 	//跳转添加货品

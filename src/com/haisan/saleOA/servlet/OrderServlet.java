@@ -74,6 +74,11 @@ public class OrderServlet extends HttpServlet {
 		
 		Page<OrderItem> pageOrder = new Page<OrderItem>(1);
 		int pageNO = 1; int pageSize = 10;
+		String NO = request.getParameter("pageNO") ;
+		if(NO != null) {
+			pageNO = Integer.parseInt(NO); 
+			System.out.println("xiyuan"+pageNO);
+			}
 		User user = (User) request.getSession().getAttribute("userw");
 		if(user == null)  response.sendRedirect("/saleOA/index.jsp");//未登录状态下，返回登录页
 		System.out.println(user.getUsername());
@@ -91,7 +96,12 @@ public class OrderServlet extends HttpServlet {
 		System.out.println("进入了处理获取");
 		Page<OrderItem> pageOrder = new Page<OrderItem>(1);
 		int pageNO = 1; int pageSize = 10;
+		String NO = request.getParameter("pageNO") ;
 		String some = "";	
+		if(NO != null) {
+			pageNO = Integer.parseInt(NO); 
+			System.out.println("xiyuan"+pageNO);
+			}
 		if(request.getParameter("search")!=null){
 			some = request.getParameter("search");
 			System.out.println(some+"进入了处理搜索");

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.haisan.saleOA.dao.GoodDAO;
 import com.haisan.saleOA.domain.Good;
+import com.haisan.saleOA.domain.Order;
 import com.haisan.saleOA.domain.User;
 import com.haisan.saleOA.web.Page;
 
@@ -95,5 +96,42 @@ public class GoodDAOimpl extends BaseDAO<Good> implements GoodDAO  {
 		update(sql, goodId);
 		
 	}
+
+	@Override
+	public List<Good> getsomeGood(int start, int pageSize, String goodkey) {
+		String sql="SELECT * FROM goods WHERE concat(goodId,goodName,goodPrice,reserve,category) LIKE ?"
+				+ " ORDER BY goodId ASC LIMIT ?,?";
+		String sql2="%"+goodkey+"%";
+		return queryForList(sql, sql2,start,pageSize);
+	}
+
+	@Override
+	public int getsearchTotal(String goodkey) {
+		String sql = "SELECT count(goodId) FROM goods WHERE concat(goodId,goodName,goodPrice,reserve,category) LIKE ? ";
+		String sql2="%"+goodkey+"%";
+		long num = getSingleVal(sql, sql2);
+		int n = (int)num;
+		return n;
+	}
+
+	@Override
+	public List<Good> getsomesearchGood(int start, int pageSize, String category,
+			String goodkey) {
+		String sql="SELECT * FROM goods WHERE category=? AND concat(goodId,goodName,goodPrice,reserve,category) LIKE ?"
+				+ " ORDER BY goodId ASC LIMIT ?,?";
+		String sql2="%"+goodkey+"%";
+		return queryForList(sql,category,sql2,start,pageSize);
+	}
+
+	@Override
+	public int getsearchcaTotal(String category,String goodkey) {
+		String sql="SELECT count(goodId) FROM goods WHERE category=? AND concat(goodId,goodName,goodPrice,reserve,category) LIKE ?";
+		String sql2="%"+goodkey+"%";
+		long num = getSingleVal(sql,category, sql2);
+		int n = (int)num;
+		return n;
+	}
+
+
 
 }

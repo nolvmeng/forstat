@@ -61,11 +61,12 @@ public class GoodService {
 	}
 */	
 	
-	public Page<Good> getPageGood(int pageNO, int pageSize, String category){
-		Page<Good> PGood = new Page<Good>(pageNO);
+	public Page<Good> getPageGood(int pageNO, int pageSize, String category,String goodkey){//goodkey为null就是不查询
+		Page<Good> PGood = new Page<Good>(1);
 		PGood.setPageSize(pageSize);
 		PGood.setPageNO(pageNO);//或可无
 		int end = PGood.getPageSize();
+		if(goodkey==null){
 		if(category.equals("all")){
 		     PGood.setTotalItemNumber(goodDAOimpl.getTotalGoodNumber());
 		     int start = (PGood.getPageNO()-1)*PGood.getPageSize();
@@ -77,6 +78,21 @@ public class GoodService {
 			int start = (PGood.getPageNO()-1)*PGood.getPageSize();
 			PGood.setList(goodDAOimpl.getCaPageGood(start, end, category));
 		}
+		 } else{
+			if(category.equals("all")){
+			     PGood.setTotalItemNumber(goodDAOimpl.getsearchTotal(goodkey));
+			     int start = (PGood.getPageNO()-1)*PGood.getPageSize();
+			     List<Good> listgood=goodDAOimpl.getsomeGood(start, end, goodkey);
+			     PGood.setList(goodDAOimpl.getsomeGood(start, end, goodkey));
+			    System.out.println(PGood.getPageNO()); System.out.println("pageNO");
+			}
+			else{//按种类分表查询
+				PGood.setTotalItemNumber(goodDAOimpl.getsearchcaTotal(category, goodkey));
+				int start = (PGood.getPageNO()-1)*PGood.getPageSize();
+				PGood.setList(goodDAOimpl.getsomesearchGood(start, end, category, goodkey));
+				System.out.println(goodDAOimpl.getsomesearchGood(start, end, category, goodkey));
+		}
+			}
 		return PGood;
 	} 
 	

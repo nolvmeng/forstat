@@ -104,7 +104,20 @@ public interface OrderDAO {
 	List<Order> getsomeOrder(int start, int pageSize, String userId,
 			String orderkey);
     
-     
+	/**
+     * 获取该搜索订单数目
+     *@param String: orderkey
+     *@return int: 数目
+     **/
+   public abstract int getsearchTotal(String orderkey);
+   
+   /**
+    * 获取该搜索订单数目
+    *@param String: orderkey附带用户ID
+    *@return int: 数目
+    **/
+  public abstract int getsearchTotalId(String userId,String orderkey);
+  
     
 	
 	
