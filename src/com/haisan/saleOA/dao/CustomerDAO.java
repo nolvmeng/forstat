@@ -28,6 +28,13 @@ public interface CustomerDAO {
     public abstract int setCustomer(Customer customer);
     
     /**
+     * 修改goodId
+     *@param String:oldId 旧的 goodId
+     *@param String:newId 新的 goodId
+     **/
+   // public abstract void updateId(String oldId, String newId);
+    
+    /**
      * 获取customer所有记录
      **/
     public abstract List<Customer> getCuCa();

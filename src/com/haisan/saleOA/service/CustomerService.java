@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.haisan.saleOA.dao.impl.CustomerDAOimpl;
 import com.haisan.saleOA.domain.Customer;
+import com.haisan.saleOA.domain.Good;
 import com.haisan.saleOA.web.Page;
 
 public class CustomerService {
@@ -38,5 +39,15 @@ public class CustomerService {
   	public String getId(String name){
   		return cusDAO.getId(name);
   	}
-
+ 
+  	
+  	
+  	
+  	//ÐÞ¸Ä¿Í»§
+  	public Customer setCustomer(Customer cus){
+  		cusDAO.setCustomer(cus);
+  		
+  		return cus;
+  		
+  	}
 }

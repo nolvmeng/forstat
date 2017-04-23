@@ -77,8 +77,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 						  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
-								<li><a href="GoodServlet?method=AllGoods&new=is">新订单</a> </li>
-								<li><a href="">查看订单</a> </li>
+								<li><a href="OrderServlet?method=newFresh&new=is&refresh=is">新订单</a> </li>
+								<li><a href="OrderServlet?method=getOrder">查看订单</a> </li>
 							</ul>
 							</li>
 					  <li><a href="CustomerServlet?method=getCus"><i class="lnr lnr-user"></i> <span>&nbsp;&nbsp;客户管理</span></a> 
@@ -315,6 +315,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</script>
 										<!-- //search-scripts -->
 				 <div class="bs-example4" data-example-id="contextual-table">
+				   
+				 
+				 
 						<table class="table">
 						  <thead>
 							<tr>
@@ -351,48 +354,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 
 				 
 				 <div class="mail-toolbar clearfix">
-								 <div class="float-left">
-									<div class="btn btn_1 btn-default mrg5R">
-									   <i class="fa fa-refresh"> </i>
-									</div>
-									<div class="dropdown">
-										<a href="#" title="" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
-											<i class="fa fa-cog icon_8"></i>
-											<i class="fa fa-chevron-down icon_8"></i>
-										<div class="ripple-wrapper"></div></a>
-										<ul class="dropdown-menu float-right">
-											<li>
-												<a href="#" title="">
-													<i class="fa fa-pencil-square-o icon_9"></i>
-													Edit
-												</a>
-											</li>
-											<li>
-												<a href="#" title="">
-													<i class="fa fa-calendar icon_9"></i>
-													Schedule
-												</a>
-											</li>
-											<li>
-												<a href="#" title="">
-													<i class="fa fa-download icon_9"></i>
-													Download
-												</a>
-											</li>
-											<li class="divider"></li>
-											<li>
-												<a href="#" class="font-red" title="">
-													<i class="fa fa-times" icon_9=""></i>
-													Delete
-												</a>
-											</li>
-										</ul>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="float-right">
+				 
+				 <div class="float-right">
 									       	<div class="btn-group">
-									       	<%String moth ="AllGoods";
+												 	<%String moth ="AllGoods";
 									       	   String key = "";
 									       	if(request.getAttribute("mo") != null && request.getAttribute("some") != null){
 									       	moth=(String)request.getAttribute("mo");
@@ -419,9 +384,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												</div>
 											</div>
 										
-										
+										<div class="clearfix"> </div>
 									
 								</div>
+				 
+								 <div class="float-left">
+								 
+			 
+				   </div>
+								 
+									 
+								 
+									
+								</div>
+								
 							   </div>
 				 
 				 

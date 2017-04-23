@@ -34,7 +34,7 @@ public class OrderDAOimpl extends BaseDAO<Order> implements OrderDAO{
 
 	@Override
 	public List<Order> getOrderList(int start, int pageSize) {
-		String sql = "SELECT * FROM orders ORDER BY orderId ASC LIMIT ? ,?"; 
+		String sql = "SELECT * FROM orders ORDER BY orderId DESC LIMIT ? ,?"; 
 		return queryForList(sql, start, pageSize);
 		
 	}
@@ -69,7 +69,7 @@ public class OrderDAOimpl extends BaseDAO<Order> implements OrderDAO{
 
 	@Override
 	public List<Order> getOrderList(int start, int pageSize, String userId) {
-		String sql = "SELECT * FROM orders WHERE userId=? ORDER BY orderId ASC LIMIT ? ,?"; 
+		String sql = "SELECT * FROM orders WHERE userId=? ORDER BY orderId DESC LIMIT ? ,?"; 
 		return queryForList(sql, userId, start, pageSize);
 	}
 

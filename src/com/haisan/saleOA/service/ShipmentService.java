@@ -69,13 +69,29 @@ public class ShipmentService {
     //去重List
     public List<Good> onlyGoodList(List<Good> good){
     	List<Good> only = new ArrayList<Good>();
-    	for(Good i : good){  
+    
+    	for (int i = 0; i < good.size(); i++)  //外循环是循环的次数
+        {
+            for (int j = good.size() - 1 ; j > i; j--)  //内循环是 外循环一次比较的次数
+            {
+
+                if (good.get(i).getGoodId().equals(good.get(j).getGoodId()))
+                {
+                	good.remove(j);
+                }
+
+            }
+        }
+    	
+    	
+    	/*for(Good i : good){  
+    		for()
     		   if(!only.contains(i)){  
     		       only.add(i);  
     		        }  
-    		    }  
+    		    }  */
 
-       return only;
+       return good;
     }
     
 	

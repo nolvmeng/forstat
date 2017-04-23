@@ -96,8 +96,8 @@ public class OrderServlet extends HttpServlet {
 		System.out.println("进入了处理获取");
 		Page<OrderItem> pageOrder = new Page<OrderItem>(1);
 		int pageNO = 1; int pageSize = 10;
-		String NO = request.getParameter("pageNO") ;
 		String some = "";	
+		String NO = request.getParameter("pageNO") ;
 		if(NO != null) {
 			pageNO = Integer.parseInt(NO); 
 			System.out.println("xiyuan"+pageNO);
@@ -141,11 +141,11 @@ public class OrderServlet extends HttpServlet {
 			request.setAttribute("cus", cus);
 	           if(request.getSession().getAttribute("good")!= null) {
 	        	   System.out.println("xiyan");
-	              // request.setAttribute("goods", gooditem);
+	               request.setAttribute("goods", gooditem);
 	               }
 	           request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);
-	           gooditem = new ArrayList<Good>();//初始化以达到清除效果
-	           request.setAttribute("goods", gooditem);
+	          /* gooditem = new ArrayList<Good>();//初始化以达到清除效果
+	           request.setAttribute("goods", gooditem);*/
 	}
 	          // gooditem.clear();
 	
@@ -197,12 +197,14 @@ public class OrderServlet extends HttpServlet {
 	
 	public void addGood(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		 //gooditem = new ArrayList<Good>();
+		if(gooditem == null)  gooditem = new ArrayList<Good>();
+		else System.out.println("为非空");
 		String id =request.getParameter("Id");
-		
 		if(request.getParameter("Id") != null){
 		  Good good = GService.getGood(id);
 		  System.out.println("xinid为非空"+id);
 		  gooditem.add(good);
+		  
 		}
 	/*	HttpSession ss = request.getSession();
 				ss.setAttribute("goods", null);*/
@@ -214,11 +216,23 @@ public class OrderServlet extends HttpServlet {
 		request.getRequestDispatcher("GoodServlet?method=AllGoods&new=is").forward(request, response);
 		
 	}
-	 
+	
+	//传递gooditem用于翻页或add，用于newAOrder
+	public void chuan(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		 request.setAttribute("goods", gooditem);
+		 request.getRequestDispatcher("/WEB-INF/pages/newAOrder.jsp").forward(request, response);
+	 }
+	
+	
+	//清空
+	 public void newFresh(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		 gooditem = new ArrayList<Good>();
+		 request.getRequestDispatcher("GoodServlet?method=AllGoods&new=is&refresh=is").forward(request, response);
+	 }
 	
 	//传参显示订单详细
 		public void getAOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-			
+			 
 			HttpSession session = request.getSession();
 			String id = request.getParameter("id");
 			request.setAttribute("id", id);
@@ -226,7 +240,6 @@ public class OrderServlet extends HttpServlet {
 			if(session.getAttribute(id) == null)
 				System.out.println(id);
 			System.out.println("ss");
-			
 			request.getRequestDispatcher("/WEB-INF/pages/showAOrder.jsp").forward(request, response);
 			
 		}

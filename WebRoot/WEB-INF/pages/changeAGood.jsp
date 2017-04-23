@@ -78,8 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 					  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
-								<li><a href="GoodServlet?method=AllGoods&new=is">新订单</a> </li>
-								<li><a href="">查看订单</a> </li>
+								<li><a href="OrderServlet?method=newFresh&new=is&refresh=is">新订单</a> </li>
+								<li><a href="OrderServlet?method=getOrder">查看订单</a> </li>
 							</ul>
 							</li>
 					  <li><a href="CustomerServlet?method=getCus"><i class="lnr lnr-user"></i> <span>&nbsp;&nbsp;客户管理</span></a> 

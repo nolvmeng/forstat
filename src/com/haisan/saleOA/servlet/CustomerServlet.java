@@ -8,8 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.haisan.saleOA.domain.Customer;
+import com.haisan.saleOA.domain.Good;
 import com.haisan.saleOA.service.CustomerService;
 import com.haisan.saleOA.web.Page;
 
@@ -83,6 +85,30 @@ public class CustomerServlet extends HttpServlet {
 			getCus(request, response);
 			}
 			}
+	 
+	 //跳转修改客户
+	 public void changejsp(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
+		 HttpSession session = request.getSession();
+			String id = request.getParameter("id");
+			request.setAttribute("id", id);
+		 request.getRequestDispatcher("/WEB-INF/pages/changeACustomer.jsp").forward(request, response);
+	 }
+	 
+	 //提交修改客户
+	 public void setCustomer(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+			
+			String cusId = request.getParameter("cusId");
+			String cusName = request.getParameter("cusName");
+			String cusAddress = request.getParameter("cusAddress");
+			String cusPnum = request.getParameter("cusPnum");
+			Customer cus=new Customer();
+			cus.setCustomerId(cusId);
+			cus.setCustomerName(cusName);
+			cus.setAddress(cusAddress);
+			cus.setPhoneNum(cusPnum);
+			customerService.setCustomer(cus);
+			getCus(request, response);
+		}
 	public void init() throws ServletException {
 		// Put your code here
 	}

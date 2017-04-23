@@ -3,6 +3,7 @@ package com.haisan.saleOA.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -63,8 +64,8 @@ public class GoodServlet extends HttpServlet {
 		/*List<Good> goods = goodService.getGoods();
 		request.setAttribute("goods", goods);*/
 		int pageNO = 1;  int pageSize = 10;
-		String cate = "all";
 		String some="";
+		String cate = "all";
 		String NO = request.getParameter("pageNO") ;
 		String category = request.getParameter("category");
 		request.setAttribute("att_cate",category);
@@ -86,21 +87,25 @@ public class GoodServlet extends HttpServlet {
 		    System.out.println(some+"进入了处理fanye");
 		}
 		System.out.println(pageNO+"p");
-		  pageGood = goodService.getPageGood(pageNO, pageSize, cate, some);
+		 pageGood = goodService.getPageGood(pageNO, pageSize, cate, some);
 		  request.setAttribute("pageGood", pageGood);
 		  request.setAttribute("mo","AllGoods");
 		  request.setAttribute("some", some);
 		  
 		  if(request.getParameter("new")==null)
 		     request.getRequestDispatcher("/WEB-INF/pages/showGood.jsp").forward(request, response);
-		  else if(request.getParameter("tocheck")==null){
-			 // request.getSession().setAttribute("good", null);
-			 request.getRequestDispatcher("/WEB-INF/pages/newAOrder.jsp").forward(request, response);
+		  else if(request.getParameter("refresh")==null){
+			  request.getRequestDispatcher("OrderServlet?method=chuan&new=is").forward(request, response);
+				
+		  }  else{
+			  request.setAttribute("goods", null);  
+			  //request.getSession().setAttribute("good", null);
+				System.out.println("进入了处理清空");
+			  request.getRequestDispatcher("/WEB-INF/pages/newAOrder.jsp").forward(request, response); 
 		  }
-		  /*else
-			  request.getRequestDispatcher("/WEB-INF/pages/checkAOrder.jsp").forward(request, response);*/
 	}
 	
+	 
 	//跳转添加货品
 	public void findjsp(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
 		request.getRequestDispatcher("/WEB-INF/pages/addAGood.jsp").forward(request, response);

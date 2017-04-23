@@ -52,6 +52,13 @@ function n_getAtaplefood(){
 function n_getOther(){
 	location.href="/saleOA/servlet/GoodServlet?method=AllGoods&pageNO=1&category=other&new=is";
 }
+
+
+function onc_toc(){
+	document.getElementById("tijiao").style.display="none"; 
+}
+
+
 function show(){
 	
     var x=event.clientX;

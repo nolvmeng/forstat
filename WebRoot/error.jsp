@@ -8,6 +8,10 @@
 </head>
 <body>
 
+       <%String ti = "pp";
+         if(request.getAttribute("msgStr")!=null)
+             ti = (String)request.getAttribute("msgStr"); %>
+    <h2><%=ti %></h2>
 	<h4>您请求的页面不存在 或 操作错误!</h4>
 	
 </body>

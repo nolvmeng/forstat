@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="keywords" content="left" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
  <!-- Bootstrap Core CSS -->
+ <link rel="stylesheet"  type="text/css"  href="<%=path%>/css/haisan.css"/>
  <link rel="stylesheet"  type="text/css"  href="<%=path%>/css/style.css"/> 
 <link href="<%=path%>/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
@@ -78,8 +79,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 					  <li><a href="OrderServlet?method=getOrder"><i class="lnr lnr-spell-check"></i> <span>&nbsp;&nbsp;订单管理</span></a>
 					  <ul class="sub-menu-list">
-								<li><a href="GoodServlet?method=AllGoods&new=is">新订单</a> </li>
-								<li><a href="">查看订单</a> </li>
+								<li><a href="OrderServlet?method=newFresh&new=is&refresh=is">新订单</a> </li>
+								<li><a href="OrderServlet?method=getOrder">查看订单</a> </li>
 							</ul>
 							</li>
 					  <li><a href="CustomerServlet?method=getCus"><i class="lnr lnr-user"></i> <span>&nbsp;&nbsp;客户管理</span></a> 
@@ -177,6 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</script>
 										<!-- //search-scripts -->
 				 <div class="bs-example4" data-example-id="contextual-table">
+				 <div class="float-leftorder">
 						<table class="table">
 						  <thead>
 							<tr>
@@ -194,8 +196,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    List<Good> goods = pageGood.getList();
 				    	if (request.getAttribute("goods") != null){
 					             gooditem = (List<Good>)request.getAttribute("goods");
+					             System.out.println(gooditem);
 					               session.setAttribute("good", gooditem);
 					             }
+					         else    session.setAttribute("good", null);
 					    
 					    String ca_ji = (String)request.getAttribute("att_cate");//种类名
 					    String ca ="all";
@@ -216,55 +220,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 						  </tbody>
 						</table>
-						<div class="btn-group">
-							<a href="OrderServlet?method=toCheck" class="btn btn-default">提交</a>
-											</div>
-										  
-					   </div>
-				 
-				 
-				 <div class="mail-toolbar clearfix">
-								 <div class="float-left">
-									<div class="btn btn_1 btn-default mrg5R">
-									   <i class="fa fa-refresh"> </i>
-									</div>
-									<div class="dropdown">
-										<a href="#" title="" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
-											<i class="fa fa-cog icon_8"></i>
-											<i class="fa fa-chevron-down icon_8"></i>
-										<div class="ripple-wrapper"></div></a>
-										<ul class="dropdown-menu float-right">
-											<li>
-												<a href="#" title="">
-													<i class="fa fa-pencil-square-o icon_9"></i>
-													Edit
-												</a>
-											</li>
-											<li>
-												<a href="#" title="">
-													<i class="fa fa-calendar icon_9"></i>
-													Schedule
-												</a>
-											</li>
-											<li>
-												<a href="#" title="">
-													<i class="fa fa-download icon_9"></i>
-													Download
-												</a>
-											</li>
-											<li class="divider"></li>
-											<li>
-												<a href="#" class="font-red" title="">
-													<i class="fa fa-times" icon_9=""></i>
-													Delete
-												</a>
-											</li>
-										</ul>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="float-right">
-									       	<div class="btn-group">
+						
+						<script type = "text/javascript">
+						         window.onload = function()
+						        {//提交按钮控制
+						            document.getElementById("tijiao").setAttribute("disabled",true);    
+						            document.getElementById("tijiao").removeAttribute("href"); 
+						            
+                                   document.getElementById("qingkong").setAttribute("disabled",true);    
+						            document.getElementById("qingkong").removeAttribute("href"); 
+						            
+						        }
+                            </script>
+						
+						 
+											<div class="btn-group">
 												<a href="GoodServlet?method=AllGoods&new=is&pageNO=<%=pageGood.getPrevPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
 												<a href="GoodServlet?method=AllGoods&new=is&pageNO=<%=pageGood.getNextPage()%>&category=<%=ca %>" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
 											</div>
@@ -282,9 +252,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												</div>
 											</div>
 										
-										
-									
-								</div>
+										<div class="clearfix"> </div>
+										  </div>
+										  <div class="float-rightorder">
+										 
+				<div class="activity_box">
+					<h3>已选货品</h3>
+					<div class="scrollbar scrollbar1" id="style-2">
+					<%List<Good> gooditems=  (List<Good>)session.getAttribute("good");
+					    if((List<Good>)session.getAttribute("good")!=null)
+						for(Good go : gooditems){
+						
+						%>
+					 <div class="activity-row"> 
+								<p><%=go.getGoodName() %></p>
+							</div>
+						<%} else { %>
+						 <div class="activity-row"> 
+								<p>空无一物</p>
+							</div>
+						
+						<%} %>
+							
+							<div class="clearfix"> </div>
+						</div>
+						 <div class="forTwoBu">
+						          <div class="btn-group">
+						  
+							<a href="OrderServlet?method=newFresh&new=is&refresh=is" <% if((List<Good>)session.getAttribute("good")==null) out.print("id=\"qingkong\"") ;%>class="btn btn-default">清空</a>
+											</div>
+											<div class="btn-group" style="margin-left: 120px">
+							<a href="OrderServlet?method=toCheck"  <% if((List<Good>)session.getAttribute("good")==null) out.print("id=\"tijiao\"") ;%>class="btn btn-default">提交</a>
+											</div>
+											
+						  </div><%--div class="forTwoBu"--%>
+					</div>
+		
+								
+									</div>
+				
+			
+					   </div>
+				 
+				 
+				 <div class="mail-toolbar clearfix">
+				 
+				 
+				 	
+							
 							   </div>
 				 
 				 
